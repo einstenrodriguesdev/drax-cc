@@ -11,7 +11,7 @@ tools:
   - Agent
 permissionMode: acceptEdits
 org:
-  department: executive
+  department: technology
   level: c_level
   reports_to: ceo
   executive_owner: cto
