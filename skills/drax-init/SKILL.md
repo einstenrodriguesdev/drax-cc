@@ -30,28 +30,35 @@ after the founder answers.
 
 ## Step 4 — Scenario (one question, 3-option)
 Which describes the work now: **product** (fabricate/refine — future path), **marketing** (product
-exists, no marketing op → activate the **CMO**), or **sell_more** (future path)? Capture the most
-important **objective** (store in English) and the flags `hasProduct` / `hasMarketing` / `isFreelancer`.
-If the founder explicitly raises venture capital, note it (the only Chairman trigger) — otherwise keep
-the Chairman hidden.
+exists, no marketing op → activate the **CMO**), or **sell_more** (future path)? Capture the flags
+`hasProduct` / `hasMarketing` / `isFreelancer`. If the founder explicitly raises venture capital, note it
+(the only Chairman trigger) — otherwise keep the Chairman hidden.
 
-## Step 5 — Record
+## Step 5 — Product/brand + objective
+Identify the **product/brand name** — confirm it from detection when a legacy tree or existing GTM
+already reveals it (e.g. "DRAX"), don't ask blank. Then ask the objective **of that product/brand**,
+anchored to its name and the chosen scenario — e.g. *"Qual o objetivo mais importante do <product>
+agora?"*. **Never** frame the question as "the objective of this run" — the scenario already answered
+that.
+
+## Step 6 — Record
 Ensure `drax-workspace/init/` exists. Write `STATE.json`:
 ```json
 {
-  "draxVersion": "0.1.0",
+  "draxVersion": "0.1.1",
+  "productName": "<product/brand name>",
   "scenario": "marketing",
-  "objective": "<most important objective, English>",
+  "objective": "<objective of the product/brand, English>",
   "hasProduct": true, "hasMarketing": false, "isFreelancer": false,
   "reusePriorArtifacts": false,
   "firstActivation": "cmo",
   "createdAt": "<ISO>", "updatedAt": "<ISO>"
 }
 ```
-Write a readable `SCENARIO.md` (scenario, objective, continue/reuse decision, flags, activated C-level,
-one-line rationale).
+Write a readable `SCENARIO.md` (product/brand, scenario, objective, continue/reuse decision, flags,
+activated C-level, one-line rationale).
 
-## Step 6 — Branding loop (marketing scenario)
+## Step 7 — Branding loop (marketing scenario)
 Run the two-layer loop on demand. Branding first — **nothing technical** (no sitemap).
 
 1. **CMO decides.** Dispatch the **`cmo`** agent (Agent tool, executive model) with the objective and the
@@ -67,7 +74,7 @@ Run the two-layer loop on demand. Branding first — **nothing technical** (no s
    — the metric set (tracked over time), the test plan for each variation, and explicit +/− change
    triggers. Observability is the CTO's.
 
-## Step 7 — Report and stop
+## Step 8 — Report and stop
 Confirm the three real files exist, summarize the branding decision + priority vector for the founder,
 and name the future paths (copy foundations, personas + persuasion, audience-attraction priority). Then
 stop — this is the slice boundary.

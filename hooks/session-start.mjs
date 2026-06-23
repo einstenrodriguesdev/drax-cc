@@ -76,6 +76,7 @@ function main() {
   let context = `drax-cc workspace detected in the ${where} (./drax-workspace).`;
   if (state) {
     context += `\nVersion that ran here: ${state.draxVersion ?? "unversioned/legacy"}.`;
+    if (state.productName) context += ` Product/brand: ${state.productName}.`;
     if (state.scenario) context += ` Scenario: ${state.scenario}.`;
     if (state.objective) context += ` Objective: ${state.objective}.`;
     if (state.firstActivation) context += ` First activation: ${state.firstActivation}.`;

@@ -43,17 +43,22 @@ no marketing operation), which you route to the **CMO**.
    approval-gated) or start new? Record the choice only after the founder answers.
 4. **Scenario** (one question, 3-option). Which describes the work now: **product** (fabricate/refine —
    future path), **marketing** (product exists, no marketing op → you activate the **CMO**), or
-   **sell_more** (future path)? Capture the most important **objective** (store in English) and the
-   fast-path flags `hasProduct` / `hasMarketing` / `isFreelancer`. If the founder explicitly raises
-   venture capital, note it — that is the only trigger that later surfaces the hidden Chairman.
-5. **Record** the decision. Ensure `drax-workspace/init/` exists; write `STATE.json` and a readable
-   `SCENARIO.md` (scenario, objective, continue/reuse decision, flags, the activated C-level, one-line
-   rationale).
-6. **Activate** the owning C-level. For `marketing`: dispatch the **`cmo`** agent (Agent tool, executive
+   **sell_more** (future path)? Capture the fast-path flags `hasProduct` / `hasMarketing` /
+   `isFreelancer`. If the founder explicitly raises venture capital, note it — that is the only trigger
+   that later surfaces the hidden Chairman.
+5. **Product/brand + objective.** Identify the **product/brand name** — confirm it from detection when a
+   legacy tree or existing GTM already reveals it (e.g. "DRAX"), don't ask blank. Then ask the objective
+   **of that product/brand**, anchored to its name and the chosen scenario — e.g. *"Qual o objetivo mais
+   importante do <product> agora?"*. **Never** frame it as "the objective of this run" — the scenario
+   already answered that. Store `productName` + `objective` in English.
+6. **Record** the decision. Ensure `drax-workspace/init/` exists; write `STATE.json` (including
+   `productName`) and a readable `SCENARIO.md` (product/brand, scenario, objective, continue/reuse
+   decision, flags, the activated C-level, one-line rationale).
+7. **Activate** the owning C-level. For `marketing`: dispatch the **`cmo`** agent (Agent tool, executive
    model) with the objective and the constraint **"start from the most fundamental brand work that
    attracts audience — branding first; nothing technical (no sitemap)."** The CMO will write its decision
    and dispatch its IC to materialize it; the CTO then instruments the metrics + triggers.
-7. **Supervise & report.** When the CMO loop returns, confirm the real files exist
+8. **Supervise & report.** When the CMO loop returns, confirm the real files exist
    (`marketing/BRANDING_DECISION.md`, `marketing/BRANDING.md`, `marketing/BRAND_METRICS_AND_TRIGGERS.md`),
    summarize for the founder, and name the next future path (copy, personas, audience-attraction). Then stop.
 
