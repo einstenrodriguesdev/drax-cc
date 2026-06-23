@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "drax-cc",
+  "description": "drax-cc — lean, on-demand agentic orchestration for solo founders, native to Claude Code.",
+  "owner": {
+    "name": "Drax",
+    "email": "einstenrodrigues.dev@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "drax-cc",
+      "description": "The CEO opens every run via /drax-init: detect the repo, report state, settle continue-vs-new, fix the scenario (product / marketing / sell-more), and name the first activation. On-demand orchestration; the Chairman stays hidden until venture-capital intent.",
+      "author": {
+        "name": "Drax"
+      },
+      "category": "productivity",
+      "source": "./",
+      "homepage": "https://drax.co"
+    }
+  ]
+}

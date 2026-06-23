@@ -1,0 +1,33 @@
+{
+  "name": "drax-cc",
+  "version": "0.1.0",
+  "description": "drax-cc — lean, on-demand agentic orchestration for solo founders. The CEO opens every run via /drax-init and builds the C-suite chain only as far as the most important objective needs.",
+  "author": {
+    "name": "Drax",
+    "email": "einstenrodrigues.dev@gmail.com",
+    "url": "https://drax.co"
+  },
+  "homepage": "https://drax.co/docs",
+  "repository": "https://github.com/einstenrodriguesdev/drax-cc",
+  "license": "UNLICENSED",
+  "keywords": [
+    "founder",
+    "orchestration",
+    "on-demand",
+    "c-suite",
+    "agents"
+  ],
+  "agents": [
+    "./agents/executive/ceo/agent.md",
+    "./agents/product/cpo/agent.md",
+    "./agents/marketing/cmo/agent.md"
+  ],
+  "commands": [
+    "./commands/drax-init.md",
+    "./commands/drax.md"
+  ],
+  "skills": [
+    "./skills/drax-init/SKILL.md"
+  ],
+  "hooks": "./hooks/hooks.json"
+}
