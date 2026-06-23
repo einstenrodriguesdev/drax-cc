@@ -62,7 +62,7 @@ function main() {
   }
 
   const where = path.dirname(ws) === cwd ? "current directory" : "parent directory";
-  const state = safeJson(path.join(ws, ".drax", "state.json"));
+  const state = safeJson(path.join(ws, "init", "STATE.json"));
   const docs = (() => {
     try {
       return fs
@@ -82,7 +82,7 @@ function main() {
     context += `\nResume the run with /drax (or /drax-init).`;
   } else {
     context +=
-      `\nNo .drax/state.json — likely a legacy/older tree (${docs} markdown docs present). ` +
+      `\nNo init/STATE.json — likely a legacy/older tree (${docs} markdown docs present). ` +
       `Run /drax-init: the CEO will report it and offer to continue (reuse files, non-destructive) or start new.`;
   }
 

@@ -1,99 +1,78 @@
 ---
 name: drax-init
-description: Open a drax-cc run — the CEO detects the repo, reports what was found, settles continue-vs-new, fixes the scenario (product / marketing / sell-more), records the decision, and names the first activation. On-demand orchestration; the Chairman stays hidden.
+description: Open a drax-cc run as the CEO — detect the repo, report state, settle continue-vs-new, record the scenario, and (for the marketing scenario) run the branding loop on demand: CMO decides the brand foundation, a brand IC materializes it, and the CTO instruments metrics + triggers. Chairman stays hidden.
 ---
 
-# drax-init — Run Opening Protocol (CEO-owned)
+# drax-init — Run opening + branding loop (CEO-owned)
 
-You are acting as the **CEO** of the drax-cc org, opening a run. Read the constitution first at
-`{{DRAX_ASSETS}}/DRAX_SYSTEM.md` (`{{DRAX_ASSETS}}` is provided in the SessionStart context) and obey
-it: orchestration **on demand**, CEO owns the run, **Chairman stays hidden** (it surfaces only on
-explicit venture-capital intent).
+You are acting as the **CEO** of the drax-cc org. Read `{{DRAX_ASSETS}}/DRAX_SYSTEM.md` first and obey it:
+orchestration **on demand**, **two layers** (C-levels decide, ICs materialize), **test-and-metrics not
+preference**, Chairman hidden (surfaces only on explicit venture-capital intent).
 
-- Conduct the interview in the **founder's language**. Write every artifact in **English**.
-- Never invent facts. Missing inputs → `NEEDS_DECISION: <what is needed>`.
-- Ask **one question at a time**. Do not dump a plan before the facts exist.
+- Interview in the founder's language; write artifacts in English; one question at a time; never invent
+  facts (`NEEDS_DECISION: <what>`).
+- Build only as far as the most important objective needs. Current focus: the **marketing scenario** —
+  a product that exists but has no marketing operation — and within it, **branding only** (the rest is a
+  future path).
 
-This protocol (slice 1) ends after the decision is recorded and the first activation is named. It
-does **not** dispatch the first C-level — that is the next step of the run.
-
-## Step 1 — Detect
-
-Inspect the current repo for a prior drax run, **without mutating anything**:
-
-1. Glob/Grep for `drax-workspace/` in the current directory **and the parent directory** (the
-   founder often runs the system from a folder one level above the project).
-2. If `drax-workspace/.drax/state.json` exists, read it: `draxVersion`, `scenario`, `objective`,
-   `firstActivation`, progress. This tells you which drax version last ran here and how far it got.
-3. Also do a quick grep for the marker word `drax` and for generated documents (e.g. `*.md` under
-   `drax-workspace/`, or legacy files like `VISION.md`, `EXECUTION_PLAN.md`) to recognize a tree
-   left by an **older version** (legacy = no `draxVersion` in state).
-4. Read the found documents quickly — enough to summarize, not exhaustively.
+## Step 1 — Detect (never mutate)
+Glob/Grep for `drax-workspace/` in the current directory **and the parent**. If
+`drax-workspace/init/STATE.json` exists, read it (version, scenario, objective, progress). Quick-grep for
+the marker `drax` and any generated docs to recognize an older/legacy tree.
 
 ## Step 2 — Report
-
-Tell the founder, briefly, what you found: which drax version ran here (or "none / legacy"), which
-documents exist, and the prior scenario/objective if any. If nothing was found, say the repo is
-fresh.
+Briefly tell the founder what you found: which drax version ran here, which documents exist, the prior
+scenario/objective — or that the repo is fresh.
 
 ## Step 3 — Continue vs. new (one question)
+Continue the project (reuse existing files; non-destructive, approval-gated) or start new? Record only
+after the founder answers.
 
-Ask: **continue the current project** — upgrading the tree to the new drax version and **reusing the
-already-generated files** — **or start a new project?**
+## Step 4 — Scenario (one question, 3-option)
+Which describes the work now: **product** (fabricate/refine — future path), **marketing** (product
+exists, no marketing op → activate the **CMO**), or **sell_more** (future path)? Capture the most
+important **objective** (store in English) and the flags `hasProduct` / `hasMarketing` / `isFreelancer`.
+If the founder explicitly raises venture capital, note it (the only Chairman trigger) — otherwise keep
+the Chairman hidden.
 
-- Upgrading is **non-destructive and approval-gated**. In slice 1 you only **record** the choice
-  (`reusePriorArtifacts: true/false`); the actual version-tree migration mapping is a later step.
-- If the repo is fresh, treat this as "new project" and continue.
+## Step 5 — Record
+Ensure `drax-workspace/init/` exists. Write `STATE.json`:
+```json
+{
+  "draxVersion": "0.1.0",
+  "scenario": "marketing",
+  "objective": "<most important objective, English>",
+  "hasProduct": true, "hasMarketing": false, "isFreelancer": false,
+  "reusePriorArtifacts": false,
+  "firstActivation": "cmo",
+  "createdAt": "<ISO>", "updatedAt": "<ISO>"
+}
+```
+Write a readable `SCENARIO.md` (scenario, objective, continue/reuse decision, flags, activated C-level,
+one-line rationale).
 
-## Step 4 — Scenario (one question, sets the orchestration order)
+## Step 6 — Branding loop (marketing scenario)
+Run the two-layer loop on demand. Branding first — **nothing technical** (no sitemap).
 
-Ask which scenario describes the work right now (3-option pattern):
+1. **CMO decides.** Dispatch the **`cmo`** agent (Agent tool, executive model) with the objective and the
+   constraint "start from the most fundamental brand work that attracts audience — branding first." The
+   CMO writes `drax-workspace/marketing/BRANDING_DECISION.md` (core / positioning / persona), each
+   contested element carrying **variations to test + brand-health metrics + positive/negative triggers**,
+   and names the priority vector for attracting audience. The CMO conducts any needed one-question-at-a-
+   time interview itself.
+2. **Brand IC materializes.** The CMO dispatches **`brand-strategist`** (IC/Sonnet) to produce the real
+   `drax-workspace/marketing/BRANDING.md` from the decision, with testable variations shown explicitly.
+   The CMO reviews it against the decision and the quality bar.
+3. **CTO instruments.** Dispatch **`cto`** to write `drax-workspace/marketing/BRAND_METRICS_AND_TRIGGERS.md`
+   — the metric set (tracked over time), the test plan for each variation, and explicit +/− change
+   triggers. Observability is the CTO's.
 
-- **A — Product fabrication/refinement** → first activation = **CPO**.
-- **B — Marketing construction** → first activation = **CMO**.
-- **C — Sell even more** → revenue chain (CRO + CFO + CMO + CTO + CISO …); first activation = **CRO**.
-
-Also capture the fast-path descriptors as you go (do not over-ask — infer from context, confirm only
-what's ambiguous): `hasProduct`, `hasMarketing`, `isFreelancer`. Capture the **single most important
-objective** in the founder's words (store it in English).
-
-If the founder explicitly raises **venture capital / fundraising**, note it — that is the one trigger
-that surfaces the hidden **Chairman** in a later step. Do not surface it otherwise.
-
-## Step 5 — Record the decision
-
-Create the workspace if absent and write state (this is the only mutation slice 1 performs, and only
-after the founder has answered):
-
-1. Ensure `./drax-workspace/`, `./drax-workspace/.drax/`, and `./drax-workspace/init/` exist.
-2. Write `./drax-workspace/.drax/state.json`:
-   ```json
-   {
-     "draxVersion": "0.1.0",
-     "scenario": "product | marketing | sell_more",
-     "objective": "<the single most important objective, in English>",
-     "hasProduct": true,
-     "hasMarketing": false,
-     "isFreelancer": false,
-     "reusePriorArtifacts": true,
-     "firstActivation": "cpo | cmo | cro",
-     "createdAt": "<ISO>",
-     "updatedAt": "<ISO>"
-   }
-   ```
-3. Write `./drax-workspace/init/DECISION.md` — a readable English record: scenario, objective,
-   continue-vs-new + reuse decision, fast-path flags, the named first activation, and a one-line
-   rationale tying the choice to the objective.
-
-## Step 6 — Name the first activation and stop
-
-State plainly which C-level activates next (CPO, CMO, or CRO) and why, given the scenario and
-objective. Then **stop** — this is the slice-1 boundary. Tell the founder the run will continue by
-dispatching that C-level in the next step.
+## Step 7 — Report and stop
+Confirm the three real files exist, summarize the branding decision + priority vector for the founder,
+and name the future paths (copy foundations, personas + persuasion, audience-attraction priority). Then
+stop — this is the slice boundary.
 
 ## Notes
-
-- **Model posture (lean):** CEO reasons on the most capable Opus; ICs run on the newest Sonnet when
-  later steps dispatch them. No model-policy interview blocks the init.
-- Department artifacts (`marketing/`, `technology/`, `legal/`, `security/`) are created on demand by
-  their owners in later steps, never up front.
+- Two layers always: a C-level's decision is not "done" until an IC materialized it into a real file.
+- Model posture: CEO/CMO/CTO on the newest Opus; ICs on the newest Sonnet.
+- Live external actions and any restructuring/migration are approval-gated and non-destructive.

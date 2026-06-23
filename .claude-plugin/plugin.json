@@ -1,7 +1,7 @@
 {
   "name": "drax-cc",
   "version": "0.1.0",
-  "description": "drax-cc — lean, on-demand agentic orchestration for solo founders. The CEO opens every run via /drax-init and builds the C-suite chain only as far as the most important objective needs.",
+  "description": "drax-cc — lean, on-demand agentic orchestration for solo founders. The CEO opens every run via /drax-init and builds only as far as the most important objective needs. Current focus: the marketing scenario — branding first, decided by the CMO and materialized by an IC.",
   "author": {
     "name": "Drax",
     "email": "einstenrodrigues.dev@gmail.com",
@@ -14,13 +14,14 @@
     "founder",
     "orchestration",
     "on-demand",
-    "c-suite",
+    "branding",
     "agents"
   ],
   "agents": [
     "./agents/executive/ceo/agent.md",
-    "./agents/product/cpo/agent.md",
-    "./agents/marketing/cmo/agent.md"
+    "./agents/executive/cto/agent.md",
+    "./agents/marketing/cmo/agent.md",
+    "./agents/marketing/brand-strategist/agent.md"
   ],
   "commands": [
     "./commands/drax-init.md",
