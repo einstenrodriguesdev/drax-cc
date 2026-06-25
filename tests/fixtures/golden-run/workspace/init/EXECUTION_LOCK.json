@@ -1,0 +1,9 @@
+{
+  "runId": "golden-meicaixa-001",
+  "currentSlice": null, "currentAgent": null, "currentStep": null, "expectedArtifact": null,
+  "status": "IDLE",
+  "lastCompletedAgent": "soc-analyst",
+  "lastCompletedArtifact": "cybersecurity/meicaixa-site/SOC_RUNBOOK.md",
+  "awaitingConfirmation": false, "lockedAt": null, "lockedBy": "claude-code",
+  "lastConfirmedAt": "2026-06-25T04:05:00.000Z"
+}

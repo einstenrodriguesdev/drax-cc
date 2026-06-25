@@ -1,7 +1,7 @@
 ---
 description: Start or resume a drax-cc run. Alias of /drax-init — the CEO opens the run on demand (detect → report → continue-vs-new → scenario → first activation).
 argument-hint: "[optional objective or 'resume']"
-allowed-tools: ["Read", "Write", "Glob", "Grep", "Bash"]
+allowed-tools: ["Read", "Write", "Glob", "Grep", "Bash", "WebSearch", "Agent"]
 ---
 
 # drax — Start or resume a run

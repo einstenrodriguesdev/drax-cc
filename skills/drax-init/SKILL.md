@@ -58,26 +58,52 @@ Ensure `drax-workspace/init/` exists. Write `STATE.json`:
 Write a readable `SCENARIO.md` (product/brand, scenario, objective, continue/reuse decision, flags,
 activated C-level, one-line rationale).
 
+## Step 6.5 — Name clearance gate (mandatory external fact, before the brand locks)
+The brand name is the first **mandatory external fact** (`DRAX_SYSTEM.md` §5.1): a collision can force a
+full rebrand later, so it is cleared **before** `BRANDING.md` locks it — not after.
+
+- **Confirm the jurisdiction first** (one question, if not already known): the country/market whose
+  trademark registry and law apply (e.g. Brazil → INPI; US → USPTO; EU → EUIPO). The check is
+  jurisdiction-aware; do not assume.
+- **Dispatch `brand-strategist`** (Agent tool) to web-ground, for the working name from Step 5:
+  (1) a **trademark** search on the relevant registry in the product's class/category;
+  (2) **domain** availability (at least the primary `.com`/ccTLD);
+  (3) **social-handle** availability on the channels the GTM names;
+  (4) **same-category active-company** collision (a different company already trading under this name in
+  this space). It writes `drax-workspace/marketing/branding/NAME_CLEARANCE.md`: per axis, the evidence +
+  source + date, an overall verdict **`CLEAR` / `RISK` / `BLOCKED`**, and a positive/negative trigger
+  (e.g. *negative:* "registered mark in same class → do not lock; propose alternates").
+- **CLO classifies risk.** Dispatch **`clo`** to read the clearance and add the legal-risk read
+  (infringement exposure, coexistence options) — binding per the Authority Map on the legal verdict.
+- **Gate behavior.** `CLEAR` → proceed to Step 7. `RISK`/`BLOCKED` → surface it to the founder **before**
+  the brand IC runs, with alternates if the name is new; if the name is a pre-existing/legacy brand
+  (e.g. DRAX), record the risk and the founder's explicit decision to proceed, but never silently lock a
+  blocked name. If WebSearch is unavailable or a registry can't be reached, write
+  `NEEDS_DECISION: name clearance unverified for <axis/jurisdiction>` and do not present the name as cleared.
+
 ## Step 7 — Branding loop (marketing scenario)
 Run the two-layer loop on demand. Branding first — **nothing technical** (no sitemap).
 
 1. **CMO decides.** Dispatch the **`cmo`** agent (Agent tool, executive model) with the objective and the
    constraint "start from the most fundamental brand work that attracts audience — branding first." The
-   CMO writes `drax-workspace/marketing/BRANDING_DECISION.md` (core / positioning / persona), each
+   CMO writes `drax-workspace/marketing/branding/BRANDING_DECISION.md` (core / positioning / persona), each
    contested element carrying **variations to test + brand-health metrics + positive/negative triggers**,
    and names the priority vector for attracting audience. The CMO conducts any needed one-question-at-a-
    time interview itself.
 2. **Brand IC materializes.** The CMO dispatches **`brand-strategist`** (IC/Sonnet) to produce the real
-   `drax-workspace/marketing/BRANDING.md` from the decision, with testable variations shown explicitly.
+   `drax-workspace/marketing/branding/BRANDING.md` from the decision, with testable variations shown explicitly.
    The CMO reviews it against the decision and the quality bar.
-3. **CTO instruments.** Dispatch **`cto`** to write `drax-workspace/marketing/BRAND_METRICS_AND_TRIGGERS.md`
+3. **CTO instruments.** Dispatch **`cto`** to write `drax-workspace/marketing/branding/BRAND_METRICS_AND_TRIGGERS.md`
    — the metric set (tracked over time), the test plan for each variation, and explicit +/− change
    triggers. Observability is the CTO's.
 
 ## Step 8 — Report and stop
-Confirm the three real files exist, summarize the branding decision + priority vector for the founder,
-and name the future paths (copy foundations, personas + persuasion, audience-attraction priority). Then
-stop — this is the slice boundary.
+Confirm the four real files exist (`NAME_CLEARANCE.md` + the three branding files), summarize the branding
+decision + priority vector + the **name-clearance verdict** for the founder, and set
+`brandingLoopComplete: true` and `nameClearanceVerdict: "<CLEAR|RISK|BLOCKED>"` in `STATE.json`. Name the next move: **`/drax-site`** — the CMO-led,
+IC-gated **Site Build Package** that closes the marketing layer for the technology team when the founder
+decides to build a site from scratch (Slice 2). Other future paths (personas + persuasion,
+audience-attraction priority) remain on demand. Then stop — this is the slice boundary.
 
 ## Notes
 - Two layers always: a C-level's decision is not "done" until an IC materialized it into a real file.

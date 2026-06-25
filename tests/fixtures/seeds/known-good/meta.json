@@ -1,0 +1,7 @@
+{
+  "seed": "known-good",
+  "expectBuild": "pass",
+  "expectGate": "VERIFIED",
+  "faults": [],
+  "notes": "Builds clean. Viewport has initial-scale=1. Logo img has alt. Skip link + landmarks + single h1 → no serious axe violations. This is what the gate must let through."
+}

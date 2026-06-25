@@ -1,0 +1,24 @@
+{"slice":1,"agent":"ceo","decision":"activate","reason":"open run, record scenario","at":"2026-06-25T00:05:00.000Z"}
+{"slice":1,"agent":"cmo","decision":"activate","reason":"own the branding decision","at":"2026-06-25T00:10:00.000Z"}
+{"slice":1,"agent":"brand-strategist","decision":"activate","reason":"materialize name clearance + brand","at":"2026-06-25T00:20:00.000Z"}
+{"slice":1,"agent":"clo","decision":"activate","reason":"legal-risk read on name (Caixa collision)","at":"2026-06-25T00:35:00.000Z"}
+{"slice":1,"agent":"cto","decision":"activate","reason":"instrument brand metrics + triggers","at":"2026-06-25T00:50:00.000Z"}
+{"slice":2,"agent":"cmo","decision":"activate","reason":"own site brief + build package","at":"2026-06-25T01:05:00.000Z"}
+{"slice":2,"agent":"brand-strategist","decision":"reuse","reason":"brand voice ratified in slice 1; no re-do (gap not real)","at":"2026-06-25T01:06:00.000Z"}
+{"slice":2,"agent":"content-strategist","decision":"activate","reason":"materialize sitemap","at":"2026-06-25T01:15:00.000Z"}
+{"slice":2,"agent":"seo-manager","decision":"activate","reason":"materialize keyword map","at":"2026-06-25T01:20:00.000Z"}
+{"slice":2,"agent":"copywriter-performance","decision":"activate","reason":"materialize copy deck","at":"2026-06-25T01:30:00.000Z"}
+{"slice":2,"agent":"ux-designer","decision":"activate","reason":"materialize wireframes + design tokens","at":"2026-06-25T01:40:00.000Z"}
+{"slice":2,"agent":"design-cto","decision":"activate","reason":"own design decision","at":"2026-06-25T01:35:00.000Z"}
+{"slice":2,"agent":"clo","decision":"activate","reason":"legal requirements + compliance baseline","at":"2026-06-25T01:45:00.000Z"}
+{"slice":2,"agent":"legal-counsel","decision":"activate","reason":"materialize legal pages","at":"2026-06-25T01:50:00.000Z"}
+{"slice":2,"agent":"cto","decision":"activate","reason":"conversion instrumentation","at":"2026-06-25T01:55:00.000Z"}
+{"slice":3,"agent":"cto","decision":"activate","reason":"coverage gate + build plan + verification verdict","at":"2026-06-25T02:05:00.000Z"}
+{"slice":3,"agent":"senior-backend-engineer","decision":"skip","reason":"static site, no backend needed (gap not real)","at":"2026-06-25T02:06:00.000Z"}
+{"slice":3,"agent":"senior-frontend-engineer","decision":"activate","reason":"build the real site + run it","at":"2026-06-25T02:20:00.000Z"}
+{"slice":3,"agent":"qa-engineer","decision":"activate","reason":"live Playwright verification","at":"2026-06-25T02:40:00.000Z"}
+{"slice":3,"agent":"devops-engineer","decision":"activate","reason":"deploy plan, build proven locally","at":"2026-06-25T02:50:00.000Z"}
+{"slice":4,"agent":"ciso","decision":"activate","reason":"security posture decision (STRIDE)","at":"2026-06-25T03:05:00.000Z"}
+{"slice":4,"agent":"security-engineer","decision":"activate","reason":"VPS hardening config","at":"2026-06-25T03:20:00.000Z"}
+{"slice":4,"agent":"penetration-tester","decision":"activate","reason":"authorized pentest of own asset","at":"2026-06-25T03:35:00.000Z"}
+{"slice":4,"agent":"soc-analyst","decision":"activate","reason":"SOC runbook + detections","at":"2026-06-25T03:55:00.000Z"}

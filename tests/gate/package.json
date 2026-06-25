@@ -1,0 +1,14 @@
+{
+  "name": "drax-gate-harness",
+  "private": true,
+  "type": "module",
+  "description": "L2 harness: runs the Step 3.5 live-verification gate against the fixture seeds.",
+  "scripts": {
+    "test": "node gate.test.mjs"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "^4",
+    "@playwright/test": "^1",
+    "playwright": "^1"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "drax-cc",
-  "version": "0.1.3",
-  "description": "drax-cc — lean, on-demand agentic orchestration for solo founders. The CEO opens every run via /drax-init and builds only as far as the most important objective needs. Current focus: the marketing scenario — branding first, decided by the CMO and materialized by an IC.",
+  "version": "0.4.0",
+  "description": "drax-cc — lean, on-demand agentic orchestration for solo founders. The CEO opens every run via /drax-init and builds only as far as the most important objective needs. Artifacts follow a strict sectorial layout (drax-workspace/<sector>/<brand>-site/). Slice 1: branding loop (CMO/IC/CTO). Slice 2 (/drax-site): the CMO-led, IC-gated Site Build Package — with the CLO entering early for mandatory legal pages (ToS/Privacy/Cookie). Slice 3 (/drax-build): the CTO gates the package for coverage (incl. legal), then builds the real site in drax-site/. Slice 4 (/drax-secure): the CISO secures the deployment — VPS hardening, authorized pentest, SOC. Every IC is activated only on demand; every live infra action is approval-gated.",
   "author": {
     "name": "Drax",
     "email": "einstenrodrigues.dev@gmail.com",
@@ -15,19 +15,43 @@
     "orchestration",
     "on-demand",
     "branding",
+    "site-build",
+    "legal",
+    "security",
     "agents"
   ],
   "agents": [
     "./agents/executive/ceo/agent.md",
     "./agents/technology/cto/agent.md",
+    "./agents/technology/senior-frontend-engineer/agent.md",
+    "./agents/technology/qa-engineer/agent.md",
+    "./agents/technology/devops-engineer/agent.md",
     "./agents/marketing/cmo/agent.md",
-    "./agents/marketing/brand-strategist/agent.md"
+    "./agents/marketing/brand-strategist/agent.md",
+    "./agents/marketing/content-strategist/agent.md",
+    "./agents/marketing/seo-manager/agent.md",
+    "./agents/marketing/copywriter-performance/agent.md",
+    "./agents/design/design-cto/agent.md",
+    "./agents/design/ux-designer/agent.md",
+    "./agents/legal/clo/agent.md",
+    "./agents/legal/legal-counsel/agent.md",
+    "./agents/security/ciso/agent.md",
+    "./agents/security/security-engineer/agent.md",
+    "./agents/security/penetration-tester/agent.md",
+    "./agents/security/soc-analyst/agent.md"
   ],
   "commands": [
     "./commands/drax-init.md",
-    "./commands/drax.md"
+    "./commands/drax.md",
+    "./commands/drax-site.md",
+    "./commands/drax-build.md",
+    "./commands/drax-secure.md",
+    "./commands/drax-lock.md"
   ],
   "skills": [
-    "./skills/drax-init"
+    "./skills/drax-init",
+    "./skills/site-build",
+    "./skills/tech-build",
+    "./skills/security-hardening"
   ]
 }

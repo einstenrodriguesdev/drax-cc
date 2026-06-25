@@ -1,0 +1,7 @@
+{
+  "seed": "known-bad-render",
+  "expectBuild": "pass",
+  "expectGate": "BLOCKED",
+  "faults": ["viewport-missing-initial-scale", "img-missing-alt"],
+  "notes": "Builds and serves fine, so a desk check or a naive Playwright run (which forces its own viewport) would PASS it. The gate must BLOCK: raw-HTML viewport assertion catches fault 1, axe catches fault 2 (image-alt, serious). This seed is the proof that the gate sees what a forced-viewport browser hides."
+}
