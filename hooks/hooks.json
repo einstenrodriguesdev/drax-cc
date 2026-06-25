@@ -12,6 +12,32 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Task|Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/pre-tool-use-lock.mjs",
+            "timeout": 10,
+            "statusMessage": "Drax sequential execution lock (validation)"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Task|Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/post-tool-use-lock.mjs",
+            "timeout": 10,
+            "statusMessage": "Drax lock post-artifact verification (validation)"
+          }
+        ]
+      }
     ]
   }
 }

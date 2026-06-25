@@ -1,3 +1,5 @@
 drax-workspace/
 node_modules/
 .DS_Store
+tests/fixtures/seeds/*/dist/
+tests/gate/.out/

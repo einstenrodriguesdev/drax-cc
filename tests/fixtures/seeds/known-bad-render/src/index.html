@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <!-- FAULT 1: viewport missing initial-scale=1 (the mobile blind spot). Playwright forces
+       a viewport and would NOT catch this — only the raw-HTML assertion does. -->
+  <meta name="viewport" content="width=1024">
+  <title>MeiCaixa</title>
+</head>
+<body>
+  <main>
+    <h1>Saiba hoje se o seu negócio deu lucro</h1>
+    <!-- FAULT 2: img with no alt text → axe "image-alt" (critical). Inline data-URI so the
+         only defect is the missing alt, not an incidental 404 console error. -->
+    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='200'></svg>" width="320" height="200">
+    <p>Um número. Sem planilha, sem contador.</p>
+    <a href="#cadastro" data-cta="primary-hero">Começar grátis</a>
+  </main>
+</body>
+</html>

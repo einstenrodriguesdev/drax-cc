@@ -1,0 +1,56 @@
+{
+  "_comment": "Per-artifact-type quality rubrics for the LLM judge (Task #10). Each criterion is scored 0-5 (5=excellent) by a fresh independent judge. 'threshold' is the minimum acceptable MEAN weighted score across N judge samples; 'instabilityBand' is the max acceptable std-dev (above it, quality is unstable even if the mean passes).",
+  "instabilityBand": 0.75,
+  "types": {
+    "BRANDING": {
+      "threshold": 3.5,
+      "criteria": [
+        { "name": "positioning_clarity", "desc": "Is the positioning a clear, single idea a buyer would grasp?" },
+        { "name": "distinctiveness", "desc": "Is the brand distinctive and does it address the known name-collision risk (e.g. Caixa bank)?" },
+        { "name": "audience_fit", "desc": "Does it fit the stated persona/audience and their literacy/context?" },
+        { "name": "voice_consistency", "desc": "Is the voice coherent and free of jargon the audience would reject?" }
+      ]
+    },
+    "COPY_DECK": {
+      "threshold": 3.5,
+      "criteria": [
+        { "name": "clarity", "desc": "Is every line immediately understandable to the audience?" },
+        { "name": "persuasion", "desc": "Does the copy create motivation to act (benefit-led, concrete)?" },
+        { "name": "voice_match", "desc": "Does it match the brand voice and positioning?" },
+        { "name": "cta_strength", "desc": "Is the primary CTA specific, instrumented, and compelling?" }
+      ]
+    },
+    "SITEMAP": {
+      "threshold": 3.5,
+      "criteria": [
+        { "name": "coverage", "desc": "Are all needed pages present for the goal (no obvious gap)?" },
+        { "name": "structure_logic", "desc": "Is the structure logical and conversion-oriented?" },
+        { "name": "mandatory_legal_present", "desc": "Are the mandatory legal pages included?" }
+      ]
+    },
+    "DESIGN_TOKENS": {
+      "threshold": 3.5,
+      "criteria": [
+        { "name": "completeness", "desc": "Are color/type/space/radius/tap-target tokens all defined?" },
+        { "name": "internal_consistency", "desc": "Are tokens internally consistent and reusable?" },
+        { "name": "a11y_contrast", "desc": "Do the color choices plausibly meet WCAG AA contrast?" }
+      ]
+    },
+    "VERIFICATION_REPORT": {
+      "threshold": 4.0,
+      "criteria": [
+        { "name": "evidence_concreteness", "desc": "Does it cite concrete EXECUTED evidence (screenshot/axe/HTTP/viewport), not prose?" },
+        { "name": "verdict_justified", "desc": "Is the VERIFIED/BLOCKED verdict justified by the evidence shown?" },
+        { "name": "defect_traceability", "desc": "Are defects (if any) traceable to an owner/fix, or clearly none?" }
+      ]
+    },
+    "default": {
+      "threshold": 3.0,
+      "criteria": [
+        { "name": "clarity", "desc": "Is the artifact clear and unambiguous?" },
+        { "name": "completeness", "desc": "Does it cover what its role requires?" },
+        { "name": "internal_consistency", "desc": "Is it internally consistent and free of contradictions?" }
+      ]
+    }
+  }
+}

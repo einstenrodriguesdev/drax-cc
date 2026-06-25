@@ -1,0 +1,4 @@
+{
+  "_comment": "DRAX VALIDATION-PHASE SEQUENTIAL EXECUTION LOCK — TEMPORARY / REMOVABLE. Set validationSequentialLockEnabled to false to disable the lock (PreToolUse/PostToolUse hooks then pass through silently and perform NO checks). This lock exists only for agent-by-agent validation and is intended to be replaced by controlled parallelism later.",
+  "validationSequentialLockEnabled": true
+}

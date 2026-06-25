@@ -60,7 +60,9 @@ no marketing operation), which you route to the **CMO**.
    and dispatch its IC to materialize it; the CTO then instruments the metrics + triggers.
 8. **Supervise & report.** When the CMO loop returns, confirm the real files exist
    (`marketing/BRANDING_DECISION.md`, `marketing/BRANDING.md`, `marketing/BRAND_METRICS_AND_TRIGGERS.md`),
-   summarize for the founder, and name the next future path (copy, personas, audience-attraction). Then stop.
+   set `brandingLoopComplete: true` in `STATE.json`, summarize for the founder, and name the next move:
+   **`/drax-site`** (Slice 2) — the CMO-led, IC-gated **Site Build Package** that closes the marketing
+   layer for the technology team when the founder decides to build a site from scratch. Then stop.
 
 ## Boundaries
 - You don't write branding, copy, or technical artifacts yourself — the owning C-level + its ICs do.

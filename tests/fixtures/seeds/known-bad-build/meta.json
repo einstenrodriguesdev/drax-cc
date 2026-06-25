@@ -1,0 +1,7 @@
+{
+  "seed": "known-bad-build",
+  "expectBuild": "fail",
+  "expectGate": "BLOCKED",
+  "faults": ["build-error"],
+  "notes": "Build step exits non-zero (simulated compile error). The site never reaches dist/, so the build half of Step 3.5 must BLOCK before QA/Playwright runs. Proves the gate fails closed on a broken build instead of declaring done on written-but-unbuilt code."
+}

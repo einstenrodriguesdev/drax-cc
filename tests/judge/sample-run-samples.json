@@ -1,0 +1,10 @@
+{
+  "marketing/branding/BRANDING.md": {
+    "type": "BRANDING",
+    "samples": [
+      { "positioning_clarity": 3, "distinctiveness": 2, "audience_fit": 4, "voice_consistency": 4 },
+      { "positioning_clarity": 4, "distinctiveness": 2, "audience_fit": 4, "voice_consistency": 3 },
+      { "positioning_clarity": 4, "distinctiveness": 2, "audience_fit": 4, "voice_consistency": 4 }
+    ]
+  }
+}
