@@ -69,10 +69,14 @@ mirrors the coverage gate: nothing advances on an unverified site.
   declare the build done on a desk check.
 
 ### Step 4 — Hand off and stop
-Only when `VERIFICATION_REPORT.md` is `VERIFIED`: summarize for the founder and name the next move:
-**`/drax-secure`** (Slice 4) — the CISO secures the deployment (VPS hardening, authorized pentest, SOC).
-Update `STATE.json` (`siteBuildComplete: true`) **only on `VERIFIED`** — that flag is what releases the
-chain to `/drax-secure`. Then stop — this is the slice boundary.
+Only when `VERIFICATION_REPORT.md` is `VERIFIED`: update `STATE.json` (`siteBuildComplete: true`) **only on
+`VERIFIED`** — that flag releases the chain to `/drax-secure`. **Write the slice handoff**
+`technology/<brand>-site/HANDOFF.md` (`DRAX_SYSTEM.md` §9.2): completed; produced files by path; the
+**approved inputs** the security slice consumes (`BUILD_PLAN.md`, `DEPLOY_PLAN.md` and its security-handoff
+surface — ports/services/TLS/secrets handling); open `NEEDS_DECISION`; recommended next slice + why. Then
+report with the no-dead-end pattern (§9): state the build is verified-live, then **recommend the next move
+first — `/drax-secure`** (Slice 4) — the CISO secures the deployment (VPS hardening, authorized pentest,
+SOC). Then stop — this is the slice boundary.
 
 ## Notes
 - The coverage gate (Step 1) and the live-verification gate (Step 3.5) are both non-negotiable: build

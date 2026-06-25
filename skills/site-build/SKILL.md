@@ -138,10 +138,14 @@ instrumented, all A/B variations wired), the activate/skip/reuse ledger, and any
 Update `STATE.json` (`siteBuildPackageComplete: true`, progress per component).
 
 ### Step 7 — Hand off and stop
-Confirm the real files exist, summarize the package + the open decisions for the founder, and name the
-next move: **`/drax-build`** (Slice 3) — the CTO first gates this package for coverage (does it actually
-cover everything needed to build?) and then materializes the real site in `drax-site/` to the package +
-acceptance criteria. Then stop — this is the slice boundary; the CMO does not build the site itself.
+Confirm the real files exist. **Write the slice handoff** `marketing/<brand>-site/HANDOFF.md`
+(`DRAX_SYSTEM.md` §9.2): completed; produced files by path; the **approved inputs** the build slice
+consumes (`SITE_BUILD_PACKAGE.md`, `WIREFRAMES.md`, `COPY_DECK.md`, `DESIGN_TOKENS.md`,
+`CONVERSION_INSTRUMENTATION.md`, `LEGAL_PAGES.md`); open `NEEDS_DECISION` / `NEEDS_EVIDENCE`; recommended
+next slice + why. Then report with the no-dead-end pattern (§9): state what's complete and open decisions,
+then **recommend the next move first — `/drax-build`** (Slice 3) — the CTO gates this package for coverage
+and then materializes the real site in `drax-site/`. Then stop — this is the slice boundary; the CMO does
+not build the site itself.
 
 ## Notes
 - Two layers always: a decision is not done until an IC materialized it into a real file.

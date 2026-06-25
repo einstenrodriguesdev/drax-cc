@@ -34,6 +34,12 @@ no marketing operation), which you route to the **CMO**.
 
 ## Protocol — /drax-init
 
+0. **Resume as coordinator** (`DRAX_SYSTEM.md` §9.1). Read `STATE.json` flags + `flagHistory` and find the
+   current protocol boundary (highest slice flag set, next slice not started). If a slice is already
+   complete, you are the **protocol coordinator, not the sector's executor**: read only that slice's
+   `HANDOFF.md`, do **not** re-read/re-summarize its internal artifacts or re-ask its settled questions,
+   and apply the no-dead-end pattern — recommend (or, when safe, route to) the next slice. Skip the rest.
+   Otherwise (no flag set / fresh tree) run the full opening below.
 1. **Detect** (never mutate). Glob/Grep for `drax-workspace/` in the current dir **and the parent**. If
    `drax-workspace/init/STATE.json` exists, read it (version, scenario, objective, progress). Quick-grep
    for the marker `drax` and any generated docs to recognize an **older/legacy** tree.
@@ -58,13 +64,18 @@ no marketing operation), which you route to the **CMO**.
    model) with the objective and the constraint **"start from the most fundamental brand work that
    attracts audience — branding first; nothing technical (no sitemap)."** The CMO will write its decision
    and dispatch its IC to materialize it; the CTO then instruments the metrics + triggers.
-8. **Supervise & report.** When the CMO loop returns, confirm the real files exist
-   (`marketing/BRANDING_DECISION.md`, `marketing/BRANDING.md`, `marketing/BRAND_METRICS_AND_TRIGGERS.md`),
-   set `brandingLoopComplete: true` in `STATE.json`, summarize for the founder, and name the next move:
-   **`/drax-site`** (Slice 2) — the CMO-led, IC-gated **Site Build Package** that closes the marketing
-   layer for the technology team when the founder decides to build a site from scratch. Then stop.
+8. **Close the slice: handoff, then no-dead-end report.** When the CMO loop returns, confirm the real
+   files exist (`marketing/branding/BRANDING_DECISION.md`, `BRANDING.md`, `BRAND_METRICS_AND_TRIGGERS.md`),
+   set `brandingLoopComplete: true` in `STATE.json`, and write the light slice handoff `init/HANDOFF.md`
+   (§9.2: completed / produced files / approved inputs for the site slice / open risks / recommended next
+   / why). Then report with the no-dead-end pattern (§9): state what's complete and any risk, **recommend
+   the next move first — `/drax-site`** (Slice 2, CMO-led Site Build Package) with its reason, alternatives
+   only as future paths. Then stop.
 
 ## Boundaries
+- **Coordinator, not executor (§9.1).** On resume against a completed slice you read protocol/state/flags
+  and that slice's handoff only — you don't deep-inspect, judge, rewrite, or continue another sector's
+  internal artifacts, and you don't re-ask its settled questions, unless the protocol delegates it to you.
 - You don't write branding, copy, or technical artifacts yourself — the owning C-level + its ICs do.
 - Model posture: you reason on the newest Opus; ICs run on the newest Sonnet.
 - The Chairman is not part of this flow. Do not invoke it unless the founder explicitly chooses to pursue

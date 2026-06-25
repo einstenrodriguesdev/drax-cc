@@ -53,9 +53,13 @@ Dispatch, per the demand test:
 Review each against the posture decision and the safety rule before accepting.
 
 ### Step 3 — Consolidate and stop
-Summarize for the founder: the posture, the **P0/P1** items, what is already safe to apply vs. what needs
-explicit approval to execute live, and the residual risk. Update `STATE.json` (`securityComplete: true`).
-Then stop — this is the slice boundary.
+Update `STATE.json` (`securityComplete: true`). **Write the slice handoff**
+`cybersecurity/<brand>-site/HANDOFF.md` (`DRAX_SYSTEM.md` §9.2): completed; produced files by path; open
+`NEEDS_DECISION` and the live actions still **pending founder approval**; residual risk; recommended next
+move + why. Then report with the no-dead-end pattern (§9): the posture, the **P0/P1** items, what is safe
+to apply vs. what needs explicit approval to execute live — and since this is the terminal slice,
+**recommend the next move first**: the founder authorizes the P0/P1 live actions, or re-enters an earlier
+slice (`/drax-site`, `/drax-build`) to extend the build. Then stop — this is the slice boundary.
 
 ## Notes
 - Default to artifacts and recommendations; never execute a live infra change or active scan without

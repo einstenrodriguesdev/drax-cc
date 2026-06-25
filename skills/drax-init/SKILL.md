@@ -15,6 +15,21 @@ preference**, Chairman hidden (surfaces only on explicit venture-capital intent)
   a product that exists but has no marketing operation — and within it, **branding only** (the rest is a
   future path).
 
+## Step 0 — Resume & coordinator check (before anything else)
+You are the **protocol coordinator** (`DRAX_SYSTEM.md` §9.1), not the executor of any finished sector.
+Read `init/STATE.json` flags + `flagHistory` and find the **current protocol boundary** = the highest
+slice flag set (`brandingLoopComplete` → `siteBuildPackageComplete` → `siteBuildComplete` →
+`securityComplete`) whose next slice has not started.
+
+- **If a slice is already complete**, do **not** restart init and do **not** re-read or re-summarize that
+  sector's internal artifacts or ask its already-settled questions. Read only that slice's
+  `HANDOFF.md` (§9.2). Then apply the **no-dead-end pattern** (§9): state what's complete (from the
+  handoff), state open risks/`NEEDS_DECISION`, **recommend the next slice/C-level first** with its
+  one-line reason, offer alternatives only for a real fork, and route there — e.g. branding complete →
+  recommend **`/drax-site`**. Then stop. Skip Steps 1–8.
+- **If `init/STATE.json` is absent or no slice flag is set**, this is a fresh/unopened run — continue to
+  Step 1 and run the full opening.
+
 ## Step 1 — Detect (never mutate)
 Glob/Grep for `drax-workspace/` in the current directory **and the parent**. If
 `drax-workspace/init/STATE.json` exists, read it (version, scenario, objective, progress). Quick-grep for
@@ -97,13 +112,20 @@ Run the two-layer loop on demand. Branding first — **nothing technical** (no s
    — the metric set (tracked over time), the test plan for each variation, and explicit +/− change
    triggers. Observability is the CTO's.
 
-## Step 8 — Report and stop
-Confirm the four real files exist (`NAME_CLEARANCE.md` + the three branding files), summarize the branding
-decision + priority vector + the **name-clearance verdict** for the founder, and set
-`brandingLoopComplete: true` and `nameClearanceVerdict: "<CLEAR|RISK|BLOCKED>"` in `STATE.json`. Name the next move: **`/drax-site`** — the CMO-led,
-IC-gated **Site Build Package** that closes the marketing layer for the technology team when the founder
-decides to build a site from scratch (Slice 2). Other future paths (personas + persuasion,
-audience-attraction priority) remain on demand. Then stop — this is the slice boundary.
+## Step 8 — Close the slice: handoff, then no-dead-end report
+Confirm the four real files exist (`NAME_CLEARANCE.md` + the three branding files), set
+`brandingLoopComplete: true` and `nameClearanceVerdict: "<CLEAR|RISK|BLOCKED>"` in `STATE.json` (the flag
+append is recorded in `flagHistory`).
+
+**Write the slice handoff** `drax-workspace/init/HANDOFF.md` (`DRAX_SYSTEM.md` §9.2) — short, six fields:
+what was completed; the produced files (by path); which are **approved inputs** for the site slice
+(`BRANDING.md`, `BRAND_METRICS_AND_TRIGGERS.md`); open risks / `NEEDS_DECISION` / `NEEDS_EVIDENCE`
+(including the name-clearance verdict if `RISK`/`BLOCKED`); the recommended next slice; and why.
+
+Then **report with the no-dead-end pattern** (§9): state branding is complete (decision + priority vector +
+name-clearance verdict), state any open risk, then **recommend the next move first — `/drax-site`** (the
+CMO-led, IC-gated Site Build Package, Slice 2) with its one-line reason, noting alternatives (personas +
+persuasion, audience-attraction) only as on-demand future paths. Then stop — this is the slice boundary.
 
 ## Notes
 - Two layers always: a C-level's decision is not "done" until an IC materialized it into a real file.

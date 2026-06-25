@@ -169,3 +169,97 @@ audience-attraction, and the other scenarios (`product`, `sell_more`) remain **f
 **Legacy layout.** A run created before this convention may hold loose files (e.g. `marketing/BRANDING.md`
 instead of `marketing/branding/BRANDING.md`). Detection reads them in place; any reorganization to the
 sectorial layout is **approval-gated and non-destructive** — never move a founder's files without consent.
+
+## 9. Sequential flow, slice handoff & the coordinator role
+
+The run is a **sequence**, not a set of independent commands. The official order is the **Slice order**
+in §8: `/drax` (branding, CMO) → `/drax-site` (site package + legal, CMO+CLO) → `/drax-build`
+(coverage-gate + build, CTO) → `/drax-secure` (secure, CISO). Each slice **gates** the next. A slice is
+complete when its `STATE.json` flag flips — `brandingLoopComplete` → `siteBuildPackageComplete` →
+`siteBuildComplete` → `securityComplete` — recorded in `flagHistory`. These flags are the **completion
+markers**; the protocol boundary is "highest flag set, next slice not yet started."
+
+**No dead-end stops (mandatory).** A slice never ends with a neutral question like *"where would you like
+to take DRAX next?"*. The closing of every slice — and every state-recovery report — follows this pattern:
+
+1. **State what is complete** (at slice level, from the handoff/flags — not by re-deriving the work).
+2. **State what is missing or risky** (open `NEEDS_DECISION` / `NEEDS_EVIDENCE`, failed gates).
+3. **Name the recommended next slice/C-level first**, with the one-line reason it comes next.
+4. **Then** offer alternatives (the 3-option pattern applies only to a *real* fork).
+5. If safe and unambiguous, **proceed to activate** the recommended next owner per §8; only stop for a
+   founder decision when there is a genuine fork or an approval-gated/live action ahead.
+
+### 9.1 CEO as protocol coordinator, not sector executor
+
+On `/drax` / `/drax-init` against a workspace that already shows progress, the CEO acts as the
+**protocol coordinator**, never as the executor or reviewer of a finished sector's internal work. The
+coordinator's job is bounded to:
+
+1. Read the protocol/state files (this constitution, `init/STATE.json`, `init/SCENARIO.md`) and the
+   **slice handoff** of completed slices.
+2. Detect which slices are activated/complete from the flags + `flagHistory`.
+3. Compare repo state against the §8 sequence and identify the **current protocol boundary**.
+4. Apply the no-dead-end pattern: recommend (or, when safe, activate) the **next** slice's C-level.
+5. **Not** deep-inspect, judge, rewrite, or continue another sector's internal artifacts, and **not**
+   re-ask questions that sector already settled, unless the protocol explicitly delegates that to the CEO.
+
+So when branding is already complete, the CEO reports "branding complete" from the handoff and routes to
+`/drax-site` — it does **not** re-read the brand artifacts, re-summarize the marketing decisions, or ask
+marketing-specific questions. Detection never mutates the workspace.
+
+### 9.2 The slice handoff (light, not bureaucratic)
+
+Each slice's owning C-level closes by writing **one** short handoff so the next owner — and the CEO
+coordinator — can act without re-reading the whole sector. Path:
+`drax-workspace/<sector>/<initiative>/HANDOFF.md` (branding's lives at `init/HANDOFF.md`). It answers only:
+
+- **What was completed?**
+- **Which files/artifacts were produced?** (the production artifacts, by path)
+- **Which of those are approved inputs for the next sector?**
+- **Open risks / `NEEDS_DECISION` / `NEEDS_EVIDENCE`?**
+- **Recommended next slice/C-level — and why?**
+
+Do not build a reporting bureaucracy beyond these fields; reuse the existing signals (`flagHistory`,
+`ACTIVATION_LOG.jsonl`, the §5.1 `Web-grounded:` lines) rather than restating them.
+
+### 9.3 Minimum permission by path (cross-sector reads are allowed, browsing is not)
+
+Each role reads/writes inside **its own sector/initiative paths**, plus the **declared upstream input
+artifacts** named in the previous slice's handoff. Cross-sector consumption is expected — e.g. the CTO
+reads the marketing `COPY_DECK.md` and design `DESIGN_TOKENS.md` to build; the CISO reads the tech
+build/deploy surface to harden. The rule is therefore **not** "sectors never read each other":
+
+- A sector **may consume** another sector's named, handed-off artifacts when it needs them as execution
+  input.
+- A sector **must not** freely browse or mutate another sector's full workspace.
+- A sector **must not mutate** another sector's source artifacts. A needed change goes back through a
+  **revision request** to that sector's owner (a `NEEDS_DECISION` addressed to the owning C-level), never
+  a silent in-place edit — per the Authority Map (§6), the owner of the domain decides.
+
+### 9.4 Artifact types (so handoff carries the right thing)
+
+Cross-sector transfer is **not** collapsed into HANDOFF.md alone — the next sector usually needs the real
+production artifact, not just a summary. Four kinds:
+
+- **A. Strategic / decision** — `*_DECISION.md`, positioning, brand, the scenario. Created/approved by
+  C-levels; guides downstream work.
+- **B. Execution / production** — copy deck, design tokens, wireframes, build plan, legal pages, configs.
+  **Consumed directly** by the downstream sector named in the handoff.
+- **C. Handoff** — the §9.2 bridge: what's done, which production artifacts are approved inputs, open
+  risks, recommended next owner.
+- **D. Review / evidence** — `NAME_CLEARANCE.md`, `QA_REPORT.md`, `VERIFICATION_REPORT.md`, websearch
+  notes, compliance/test notes. Proves a decision was grounded or names what's still unverified.
+
+A sector is not "done" on the decision alone (§4): the production artifact (B) must exist and the handoff
+(C) must point the next sector at it.
+
+### 9.5 Evidence / websearch trigger detection (don't blind-redo)
+
+When a slice depends on a fact that §5.1 marks as a **mandatory external fact** (trademark/domain/handle,
+search demand, applicable law, CVEs/threat guidance), the receiving sector checks that the evidence
+artifact exists and carries its `Web-grounded: yes — <source/date>` line (or a recorded founder decision).
+If the evidence is **missing**, do not redo the whole upstream sector — instead:
+
+- Flag it and record a `NEEDS_DECISION` / `NEEDS_EVIDENCE` item in the handoff.
+- Recommend one of: **(A)** continue with the risk noted, **(B)** run a focused evidence pass on just that
+  fact, or **(C)** send it back to the relevant IC/specialist — and proceed per the no-dead-end pattern.
