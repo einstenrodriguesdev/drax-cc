@@ -1,7 +1,7 @@
 {
   "name": "drax-cc",
-  "version": "0.4.0",
-  "description": "drax-cc — lean, on-demand agentic orchestration for solo founders. The CEO opens every run via /drax-init and builds only as far as the most important objective needs. Artifacts follow a strict sectorial layout (drax-workspace/<sector>/<brand>-site/). Slice 1: branding loop (CMO/IC/CTO). Slice 2 (/drax-site): the CMO-led, IC-gated Site Build Package — with the CLO entering early for mandatory legal pages (ToS/Privacy/Cookie). Slice 3 (/drax-build): the CTO gates the package for coverage (incl. legal), then builds the real site in drax-site/. Slice 4 (/drax-secure): the CISO secures the deployment — VPS hardening, authorized pentest, SOC. Every IC is activated only on demand; every live infra action is approval-gated.",
+  "version": "0.5.0",
+  "description": "drax-cc — lean, on-demand agentic orchestration for solo founders. The CEO opens every run via /drax-init and CARRIES THE CHAIN end-to-end across six sectors plus deploy (executive→marketing→legal→design→technology→cybersecurity→go-live), guaranteeing artifact handoffs and notifying the founder at every boundary. Artifacts follow a strict sectorial layout (drax-workspace/<sector>/<brand>-site/). Slice 1 (/drax): branding loop. Slice 2 (/drax-site): the CMO-led Site Build Package with the CLO entering early for mandatory legal pages, plus mandatory pricing/blog/documentation pages. Slice 3 (/drax-build): the CTO gates coverage, builds the real site in drax-site/, and verifies it live. Slice 4 (/drax-secure): the CISO hardens the deployment. Slice 5 (/drax-deploy): the devops-engineer takes the verified, hardened site live at draxbusiness.cloud. The run is done only when the site is reachable. Every IC is activated only on demand; every live infra action is approval-gated.",
   "author": {
     "name": "Drax",
     "email": "einstenrodrigues.dev@gmail.com",
@@ -46,12 +46,14 @@
     "./commands/drax-site.md",
     "./commands/drax-build.md",
     "./commands/drax-secure.md",
+    "./commands/drax-deploy.md",
     "./commands/drax-lock.md"
   ],
   "skills": [
     "./skills/drax-init",
     "./skills/site-build",
     "./skills/tech-build",
-    "./skills/security-hardening"
+    "./skills/security-hardening",
+    "./skills/deploy"
   ]
 }

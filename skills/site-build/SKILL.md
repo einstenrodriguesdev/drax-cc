@@ -91,9 +91,17 @@ jurisdiction/regime can't be confirmed). Do not state a legal obligation from me
 
 ### Step 1 — Structure (gate the content-strategist)
 Demand test on the sitemap. If no usable IA exists and `SITE_BRIEF.md` is ready → dispatch
-**`content-strategist`** to materialize `marketing/<brand>-site/SITEMAP.md` (page tree + buyer-stage map + per-page briefs
-with message hierarchy + block inventory). **Pass it the CLO's `LEGAL_REQUIREMENTS.md` so every mandatory
-legal page is in the sitemap.** Review against the brief, the legal requirements, and the GTM funnel.
+**`content-strategist`** (apply its skill) to materialize `marketing/<brand>-site/SITEMAP.md` (page tree +
+buyer-stage map + per-page briefs with message hierarchy + block inventory). **Pass it the CLO's
+`LEGAL_REQUIREMENTS.md` so every mandatory legal page is in the sitemap.** Review against the brief, the
+legal requirements, and the GTM funnel.
+
+**Mandatory pages (DoD §10).** A professional enterprise site is not complete without them — the sitemap
+**must** include, in addition to the home and the mandatory legal pages: a **`pricing`** page (the offer +
+its primary conversion goal), a **`blog`** (index + at least one real launch post — the COPE canonical
+source), and **`documentation`** (product/usage docs). Only skip one with an explicit, founder-approved
+reason recorded in `SITE_BRIEF.md`; absent that, all three are required and the CTO's coverage gate (Slice
+3) enforces their presence alongside the legal pages.
 
 ### Step 2 — Search grounding (gate the seo-manager)
 Only if organic search is an intended channel and `SITEMAP.md` exists → dispatch **`seo-manager`** to

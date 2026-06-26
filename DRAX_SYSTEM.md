@@ -163,8 +163,9 @@ Run meta and per-slice ownership:
   support) that each sector's gate references, because **every department has legal duties**.
 
 **Slice order:** `/drax` (branding) → `/drax-site` (package + legal) → `/drax-build` (coverage-gate +
-build) → `/drax-secure` (secure). Each slice gates the next; nothing is built on a blind spec. Personas,
-audience-attraction, and the other scenarios (`product`, `sell_more`) remain **future paths**, on demand.
+build) → `/drax-secure` (secure) → `/drax-deploy` (go live). Each slice gates the next; nothing is built on
+a blind spec, and **the run is not done until the site is live** (§10). Personas, audience-attraction, and
+the other scenarios (`product`, `sell_more`) remain **future paths**, on demand.
 
 **Legacy layout.** A run created before this convention may hold loose files (e.g. `marketing/BRANDING.md`
 instead of `marketing/branding/BRANDING.md`). Detection reads them in place; any reorganization to the
@@ -174,7 +175,9 @@ sectorial layout is **approval-gated and non-destructive** — never move a foun
 
 The run is a **sequence**, not a set of independent commands. The official order is the **Slice order**
 in §8: `/drax` (branding, CMO) → `/drax-site` (site package + legal, CMO+CLO) → `/drax-build`
-(coverage-gate + build, CTO) → `/drax-secure` (secure, CISO). Each slice **gates** the next.
+(coverage-gate + build, CTO) → `/drax-secure` (secure, CISO) → `/drax-deploy` (go live, devops under CTO).
+Each slice **gates** the next, and the chain runs **end-to-end across all six sectors plus deploy** (§10) —
+the CEO carries it from one sector to the next (§11), it does not stall at marketing.
 
 **Milestone flag ≠ sector complete (read this carefully).** A `STATE.json` flag like
 `brandingLoopComplete` marks a **milestone inside a sector**, *not* that the sector is finished and the run
@@ -301,3 +304,93 @@ If the evidence is **missing**, do not redo the whole upstream sector — instea
 - Flag it and record a `NEEDS_DECISION` / `NEEDS_EVIDENCE` item in the handoff.
 - Recommend one of: **(A)** continue with the risk noted, **(B)** run a focused evidence pass on just that
   fact, or **(C)** send it back to the relevant IC/specialist — and proceed per the no-dead-end pattern.
+
+## 10. The guaranteed end-to-end chain — the run is not done until the site is live (mandatory)
+
+drax-cc is on demand (§1), but once the founder commits to the site objective the official run is **one
+continuous sequence across six sectors plus deploy**, each gating the next:
+
+```
+executive (CEO opens) → marketing → legal → design → technology → cybersecurity → DEPLOY (go live)
+```
+
+Legal enters **early and in parallel** at the site kickoff (§8) — its position above is the
+*completeness* order (no sector is "done" while a downstream gate it feeds is open), not a late insertion.
+
+**Definition of Done (DoD).** The run is complete **only** when **all** of these hold — a milestone flag,
+a written artifact, or a local build is **not** done:
+
+1. **All six sectors handed off** (§9.2) with no blocking `NEEDS_DECISION` / `NEEDS_EVIDENCE`.
+2. **A professional, enterprise-grade site** — built with real design and engineering technique, **not AI
+   slop**: a coherent visual system from real design tokens, semantic accessible markup, no lorem, no
+   placeholder, no generic template smell. Quality is judged by the IC skills (§13), not by preference.
+3. **Required pages present and built:** `pricing`, `blog`, `documentation`, plus the CLO's **mandatory
+   legal pages** (ToS, Privacy/LGPD, Cookie+consent, and any data-subject/refund pages the legal
+   requirements name). Missing any of these = not done.
+4. **Verified live** (§8 Slice 3.5): `VERIFICATION_REPORT.md` = `VERIFIED` (real render + mobile
+   `<meta viewport>` + a11y + CWV).
+5. **Deployed and reachable** at the founder's VPS domain **`draxbusiness.cloud`** (§ Slice 4/`/drax-deploy`),
+   confirmed by a live health check. Deploy is approval-gated and non-destructive; connection-identity and
+   secrets are referenced by name only, never stored.
+
+Until DoD holds, the CEO keeps the chain moving (§11) — it never declares the run finished early.
+
+## 11. Per-sector founder notification — the founder is never surprised (mandatory)
+
+The founder must be told, **at every sector boundary**, what happened and what (if anything) is needed —
+in the founder's language. When a sector hands off, the CEO reports (§9 no-dead-end pattern):
+
+1. **What this sector DECIDED** — 1–3 lines, sector-level (not a re-read of every artifact).
+2. **What it produced** — the production artifacts by path, and which are **approved inputs** downstream.
+3. **Any pending founder decision** — presented as the §7 pattern: real options with **advantages /
+   disadvantages** and **one recommended** (recommendation first). The founder's opinion is solicited
+   **only** for genuine forks; everything testable is decided by test-and-metrics (§5), not by asking.
+4. **The planned next sector and why**, then the single confirm question.
+
+**Sequencing rule.** When there is **no** pending founder decision, the planned sequence proceeds (the CEO
+activates the next sector after the single confirm). When a sector raises a pending decision, the chain
+**pauses at that gate** until the founder chooses — it never silently guesses past a fork, and it never
+dead-ends on a neutral menu.
+
+## 12. Team Input/Output contracts — every team has named inputs and outputs (mandatory)
+
+Each team (a C-level + its ICs) declares an explicit contract, in both its `agent.md` and its sector skill:
+
+- **INPUTS** — the named upstream artifacts (by path) it consumes. A sector **does not activate** until its
+  declared inputs exist and are usable — this is the §4 demand test made concrete ("is the input ready?").
+- **OUTPUTS** — the named artifacts (by path) it produces. A sector is **not handed-off** until its
+  declared outputs exist and the §9.2 handoff points the next sector at them.
+
+The CEO is the **artifact-passing guarantor** (§11): between sectors it confirms the prior sector's
+declared OUTPUTS exist and match the next sector's declared INPUTS before activating the next C-level. A
+missing or mismatched artifact is a gate, not a silent skip.
+
+## 13. Real skills, cited in every order — no stubs (mandatory)
+
+Every agent — **C-level and worker** — carries a **real professional skill**: a concrete method, a quality
+bar, and the external-fact gates (§5.1) it must clear. Skills are grounded by **WebSearch** wherever §5.1
+marks the fact as external; a skill that is a vague placeholder ("does marketing well") is a **stub** and
+is not allowed.
+
+- **Cited in the agent.** Each `agent.md` names the skill(s) it applies (a `skill:` pointer in frontmatter
+  and a one-line reference in the body), so the capability is visible, not implied.
+- **Cited in the order.** When a C-level dispatches an IC (Agent tool), the dispatch order **names the exact
+  skill the IC must apply** (e.g. *"materialize the copy deck applying `copywriter-performance`'s skill"*).
+  An order that does not name the skill the IC applies is **malformed** — the chain depends on each
+  materialization being done to a real, named protocol, not improvised.
+
+## 14. Key-line traceability — cheap refinement for the built site (tech, mandatory)
+
+Refinements ("make the primary color warmer", "change the headline font", "tighten hero spacing") cost time
+when no one knows **where** the decision lives in code. The technology team therefore produces
+`drax-workspace/technology/<brand>-site/KEY_LINE_MAP.md` as part of the build handoff: a table mapping each
+**refinement-prone decision** to the exact `file:line` in `drax-site/` that controls it —
+
+| Decision | What it controls | Location (`file:line`) | Token / source |
+| --- | --- | --- | --- |
+| Primary brand color | buttons, links, accents | `tailwind.config.mjs:14` | `--color-primary` |
+| Heading font | all H1–H3 | `src/styles/tokens.css:8` | `--font-heading` |
+| Hero headline | home above-the-fold H1 | `src/pages/index.astro:22` | COPY_DECK §Hero |
+
+— so a later change is a **one-line edit at a known location**, not a hunt. Every row points at a single
+authoritative source (a token or a copy-deck line), never a hardcoded value duplicated across files.

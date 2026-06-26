@@ -26,8 +26,9 @@ building on faith — it **first verifies the marketing specs cover everything n
 Read the whole package and every component it indexes (`SITEMAP`, `WIREFRAMES`, `COPY_DECK`,
 `KEYWORD_MAP`, `DESIGN_TOKENS`, `DESIGN_DECISION`, `CONVERSION_INSTRUMENTATION`, `LEGAL_PAGES`, asset list,
 acceptance criteria). Write `drax-workspace/technology/<brand>-site/BUILD_READINESS.md`: per page, is it covered by **sitemap +
-wireframe + copy + tokens + keyword + a measured conversion goal**? **Are the CLO's mandatory legal pages
-(`legal/<brand>-site/LEGAL_PAGES.md`) + disclosures (cookie banner, footer legal block) present?** Are all named assets present? Any
+wireframe + copy + tokens + keyword + a measured conversion goal**? **Are the DoD §10 mandatory pages
+present — `pricing`, `blog` (index + ≥1 real post), `documentation` — plus the CLO's mandatory legal pages
+(`legal/<brand>-site/LEGAL_PAGES.md`) + disclosures (cookie banner, footer legal block)?** Are all named assets present? Any
 contradictions between components? **If anything is missing/contradictory → `NEEDS_DECISION: <what>` routed
 to the owning C-level/IC (CMO/Design-CTO/CLO), and stop — do not build on a blind spec.** Verdict:
 `READY` / `BLOCKED (gaps…)`. The marketing layer is "done for build" only when this passes.
@@ -45,9 +46,11 @@ a dependency with an unresolved known CVE becomes `NEEDS_DECISION` (route to the
 
 ### Step 3 — Build (gate the engineering ICs)
 Apply the demand test, then dispatch:
-- **`senior-frontend-engineer`** — build the real site in `drax-site/` and **run it** (Bash: install →
-  build → boot → self-check it renders), wiring every primary CTA to `CONVERSION_INSTRUMENTATION.md` and
-  implementing the A/B variations. It records the exact `install` / `build` / `start` commands.
+- **`senior-frontend-engineer`** (apply its skill) — build the real site in `drax-site/` and **run it**
+  (Bash: install → build → boot → self-check it renders), wiring every primary CTA to
+  `CONVERSION_INSTRUMENTATION.md` and implementing the A/B variations. It records the exact `install` /
+  `build` / `start` commands **and writes `KEY_LINE_MAP.md`** (§14: each refinement-prone decision →
+  `file:line` → authoritative token/copy source), so later refinements are one-line edits, not hunts.
 - **`devops-engineer`** (on demand, when deploy is in scope) — `technology/<brand>-site/DEPLOY_PLAN.md` (build pipeline,
   deploy path, rollback, health check, security handoff surface), having **run the build half locally** to
   prove the pipeline. Live deploys are approval-gated and non-destructive; hosts/credentials by name only.
@@ -71,9 +74,10 @@ mirrors the coverage gate: nothing advances on an unverified site.
 ### Step 4 — Hand off and stop
 Only when `VERIFICATION_REPORT.md` is `VERIFIED`: update `STATE.json` (`siteBuildComplete: true`) **only on
 `VERIFIED`** — that flag releases the chain to `/drax-secure`. **Write the slice handoff**
-`technology/<brand>-site/HANDOFF.md` (`DRAX_SYSTEM.md` §9.2): completed; produced files by path; the
-**approved inputs** the security slice consumes (`BUILD_PLAN.md`, `DEPLOY_PLAN.md` and its security-handoff
-surface — ports/services/TLS/secrets handling); open `NEEDS_DECISION`; recommended next slice + why. Then
+`technology/<brand>-site/HANDOFF.md` (`DRAX_SYSTEM.md` §9.2): completed; produced files by path (including
+`KEY_LINE_MAP.md`, §14); the **approved inputs** the security slice consumes (`BUILD_PLAN.md`,
+`DEPLOY_PLAN.md` and its security-handoff surface — ports/services/TLS/secrets handling); open
+`NEEDS_DECISION`; recommended next slice + why. Then
 report with the no-dead-end pattern (§9): state the build is verified-live, then **recommend the next move
 first — `/drax-secure`** (Slice 4) — the CISO secures the deployment (VPS hardening, authorized pentest,
 SOC). Then stop — this is the slice boundary.

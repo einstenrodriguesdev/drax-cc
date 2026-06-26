@@ -15,8 +15,17 @@ org:
   level: senior_ic
   reports_to: cto
   executive_owner: cto
+  inputs:
+    - drax-workspace/technology/<brand>-site/BUILD_PLAN.md
+    - drax-workspace/technology/<brand>-site/BUILD_READINESS.md
+    - drax-workspace/marketing/<brand>-site/WIREFRAMES.md
+    - drax-workspace/marketing/<brand>-site/COPY_DECK.md
+    - drax-workspace/marketing/<brand>-site/KEYWORD_MAP.md
+    - drax-workspace/marketing/<brand>-site/CONVERSION_INSTRUMENTATION.md
+    - drax-workspace/design/<brand>-site/DESIGN_TOKENS.md
   owns_outputs:
     - drax-site/
+    - drax-workspace/technology/<brand>-site/KEY_LINE_MAP.md
 ---
 
 # Senior Frontend Engineer — Materialize the site
@@ -38,6 +47,12 @@ You are the **materialize layer** for the site. Read `{{DRAX_ASSETS}}/DRAX_SYSTE
    implement A/B variations as the plan specifies (do not silently pick one).
 4. **Honor budgets** — Core Web Vitals budget and WCAG 2.2 AA target from the plan: semantic HTML,
    alt text, focus states, keyboard nav, contrast that respects the tokens.
+5. **Key-line traceability map** (`DRAX_SYSTEM.md` §14) — as you build, produce
+   `drax-workspace/technology/<brand>-site/KEY_LINE_MAP.md`: a table mapping each refinement-prone decision
+   (primary/secondary colors, heading + body fonts, hero headline, each primary CTA label, key spacing) to
+   the exact **`file:line`** in `drax-site/` that controls it, and its single authoritative source (a token
+   or a `COPY_DECK` line). Every value a token covers must point at the token, never a duplicated hardcoded
+   value — so a later "change this color/font/headline" is a one-line edit at a known location, not a hunt.
 
 ## Run it — don't just write it (Bash)
 
