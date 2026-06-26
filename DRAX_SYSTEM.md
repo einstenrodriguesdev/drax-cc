@@ -174,44 +174,66 @@ sectorial layout is **approval-gated and non-destructive** — never move a foun
 
 The run is a **sequence**, not a set of independent commands. The official order is the **Slice order**
 in §8: `/drax` (branding, CMO) → `/drax-site` (site package + legal, CMO+CLO) → `/drax-build`
-(coverage-gate + build, CTO) → `/drax-secure` (secure, CISO). Each slice **gates** the next. A slice is
-complete when its `STATE.json` flag flips — `brandingLoopComplete` → `siteBuildPackageComplete` →
-`siteBuildComplete` → `securityComplete` — recorded in `flagHistory`. These flags are the **completion
-markers**; the protocol boundary is "highest flag set, next slice not yet started."
+(coverage-gate + build, CTO) → `/drax-secure` (secure, CISO). Each slice **gates** the next.
 
-**No dead-end stops (mandatory).** A slice never ends with a neutral question like *"where would you like
-to take DRAX next?"*. The closing of every slice — and every state-recovery report — follows this pattern:
+**Milestone flag ≠ sector complete (read this carefully).** A `STATE.json` flag like
+`brandingLoopComplete` marks a **milestone inside a sector**, *not* that the sector is finished and the run
+should move on. A sector is **complete** only when **both** hold: its owning C-level has written the
+sector **handoff** (§9.2) **and** the sector carries **no blocking `NEEDS_DECISION` / `NEEDS_EVIDENCE`**.
+Branding done with open marketing items (visual identity, name lock, buyer evidence) means **marketing is
+not complete** — the next step is to **continue the marketing sector under the CMO**, not to jump to
+`/drax-site`. The protocol boundary is therefore "the latest activated sector that is **not yet
+handed-off**" — that sector's C-level owns the next move.
 
-1. **State what is complete** (at slice level, from the handoff/flags — not by re-deriving the work).
-2. **State what is missing or risky** (open `NEEDS_DECISION` / `NEEDS_EVIDENCE`, failed gates).
-3. **Name the recommended next slice/C-level first**, with the one-line reason it comes next.
-4. **Then** offer alternatives (the 3-option pattern applies only to a *real* fork).
-5. If safe and unambiguous, **proceed to activate** the recommended next owner per §8; only stop for a
-   founder decision when there is a genuine fork or an approval-gated/live action ahead.
+**No dead-end stops (mandatory).** The CEO never ends with a neutral open question like *"where would you
+like to take DRAX next?"*. State-recovery and every slice close follow this pattern:
+
+1. **State what is complete** (at sector level, from folder presence + flags + handoff — not by
+   re-deriving the work).
+2. **State what is missing or risky** (open `NEEDS_DECISION` / `NEEDS_EVIDENCE`, un-handed-off sector).
+3. **Name one recommended next action first** — the owning C-level of the active incomplete sector (e.g.
+   "continue marketing under the CMO"), with its one-line reason.
+4. **Ask exactly one confirm question** ("activate the CMO to continue marketing now?") — not the sector's
+   substantive domain questions.
+5. On confirm, **activate that C-level** and let **it** ask the next substantive question. The CEO does
+   not ask the sector's domain questions itself.
 
 ### 9.1 CEO as protocol coordinator, not sector executor
 
 On `/drax` / `/drax-init` against a workspace that already shows progress, the CEO acts as the
-**protocol coordinator**, never as the executor or reviewer of a finished sector's internal work. The
-coordinator's job is bounded to:
+**protocol coordinator** — it routes; it never executes, reviews, summarizes, or continues a sector's
+internal work. Its job is bounded to:
 
-1. Read the protocol/state files (this constitution, `init/STATE.json`, `init/SCENARIO.md`) and the
-   **slice handoff** of completed slices.
-2. Detect which slices are activated/complete from the flags + `flagHistory`.
-3. Compare repo state against the §8 sequence and identify the **current protocol boundary**.
-4. Apply the no-dead-end pattern: recommend (or, when safe, activate) the **next** slice's C-level.
-5. **Not** deep-inspect, judge, rewrite, or continue another sector's internal artifacts, and **not**
-   re-ask questions that sector already settled, unless the protocol explicitly delegates that to the CEO.
+1. **Version check & upgrade (first).** Read `init/STATE.json` `draxVersion` and compare it to the running
+   constitution version. If the workspace is from an **older drax version**, say so explicitly and offer an
+   **approval-gated, non-destructive system upgrade** before continuing: migrate any legacy/loose layout to
+   the §8 sectorial convention and **backfill missing `STATE.json` fields/flags** to the current schema.
+   Never silently treat an old-version tree as current, and never move/rewrite files without consent.
+2. **Detect state structurally, not from internals.** Read the protocol/state files (this constitution,
+   `STATE.json`, `SCENARIO.md`) and, for each sector, its `HANDOFF.md` if present. Use **which sector
+   folders exist** under `drax-workspace/` (`init`, `marketing`, `design`, `legal`, `technology`,
+   `cybersecurity`) as the cheap signal for which sectors were activated — e.g. only `init/` + `marketing/`
+   present ⇒ only marketing has been activated; the downstream sectors have not. **Do not open and
+   summarize a sector's artifacts** (`BRANDING.md`, decisions, copy) to build state.
+3. **Find the boundary** = the latest activated sector that is not yet handed-off (per the milestone-flag
+   rule above), and identify its owning C-level.
+4. **Apply the no-dead-end pattern:** recommend that C-level, ask the single confirm question, and on
+   confirm **activate it** — handing the next substantive question to that C-level.
+5. **Never** deep-inspect, judge, rewrite, re-summarize, or continue a sector's artifacts, and **never**
+   ask that sector's domain questions, unless the protocol explicitly delegates that to the CEO.
 
-So when branding is already complete, the CEO reports "branding complete" from the handoff and routes to
-`/drax-site` — it does **not** re-read the brand artifacts, re-summarize the marketing decisions, or ask
-marketing-specific questions. Detection never mutates the workspace.
+So when only `init/` + `marketing/` exist and branding has open marketing items, the CEO reports — at
+sector level — that marketing is active and incomplete, asks "activate the CMO to continue marketing?",
+and on yes dispatches the **CMO**, which asks the next marketing question. It does **not** re-read the
+brand artifacts, re-summarize the decisions, or route to `/drax-site` while marketing is still open.
+Detection never mutates the workspace.
 
 ### 9.2 The slice handoff (light, not bureaucratic)
 
-Each slice's owning C-level closes by writing **one** short handoff so the next owner — and the CEO
-coordinator — can act without re-reading the whole sector. Path:
-`drax-workspace/<sector>/<initiative>/HANDOFF.md` (branding's lives at `init/HANDOFF.md`). It answers only:
+Each sector's owning C-level closes by writing **one** short handoff so the next owner — and the CEO
+coordinator — can act without re-reading the whole sector. Path: `drax-workspace/<sector>/HANDOFF.md` (one
+per sector, e.g. `marketing/HANDOFF.md`); a long-running sector may also keep per-initiative handoffs at
+`drax-workspace/<sector>/<initiative>/HANDOFF.md`. It answers only:
 
 - **What was completed?**
 - **Which files/artifacts were produced?** (the production artifacts, by path)

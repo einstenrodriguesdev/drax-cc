@@ -16,19 +16,30 @@ preference**, Chairman hidden (surfaces only on explicit venture-capital intent)
   future path).
 
 ## Step 0 — Resume & coordinator check (before anything else)
-You are the **protocol coordinator** (`DRAX_SYSTEM.md` §9.1), not the executor of any finished sector.
-Read `init/STATE.json` flags + `flagHistory` and find the **current protocol boundary** = the highest
-slice flag set (`brandingLoopComplete` → `siteBuildPackageComplete` → `siteBuildComplete` →
-`securityComplete`) whose next slice has not started.
+You are the **protocol coordinator** (`DRAX_SYSTEM.md` §9.1) — you route; you never execute, summarize, or
+continue a sector's internal work. If `init/STATE.json` is absent, this is a fresh run — continue to
+Step 1. Otherwise run the coordinator sequence:
 
-- **If a slice is already complete**, do **not** restart init and do **not** re-read or re-summarize that
-  sector's internal artifacts or ask its already-settled questions. Read only that slice's
-  `HANDOFF.md` (§9.2). Then apply the **no-dead-end pattern** (§9): state what's complete (from the
-  handoff), state open risks/`NEEDS_DECISION`, **recommend the next slice/C-level first** with its
-  one-line reason, offer alternatives only for a real fork, and route there — e.g. branding complete →
-  recommend **`/drax-site`**. Then stop. Skip Steps 1–8.
-- **If `init/STATE.json` is absent or no slice flag is set**, this is a fresh/unopened run — continue to
-  Step 1 and run the full opening.
+1. **Version check & upgrade (first).** Read `STATE.json` `draxVersion` and compare it to this runtime's
+   constitution version. If the workspace is from an **older drax version**, say so and offer an
+   **approval-gated, non-destructive upgrade** before continuing: migrate any loose/legacy layout to the
+   §8 sectorial convention and **backfill missing `STATE.json` fields/flags** to the current schema. Never
+   treat an old-version tree as current; never move/rewrite files without consent.
+2. **Detect state structurally, not from internals.** Use **which sector folders exist** under
+   `drax-workspace/` (`init`, `marketing`, `design`, `legal`, `technology`, `cybersecurity`) as the cheap
+   signal for which sectors were activated — e.g. only `init/` + `marketing/` ⇒ only marketing is active,
+   downstream sectors untouched. Read each present sector's `HANDOFF.md` if it exists, plus `STATE.json`
+   flags. **Do not open or summarize** `BRANDING.md`, decisions, or copy to build the picture.
+3. **Find the boundary** = the latest activated sector that is **not yet handed-off** — remember
+   `brandingLoopComplete` is a *milestone*, not "marketing done." Branding done **with open marketing
+   `NEEDS_DECISION`** (visual identity, name lock, buyer evidence) ⇒ **marketing is incomplete**; its owner
+   (the **CMO**) owns the next move. A sector is complete only with a handoff **and** no blocking open item.
+4. **No dead-end — confirm then activate.** Report at **sector level** what's complete and what's still
+   open, **recommend one next action first** (e.g. "continue marketing under the CMO"), then ask **exactly
+   one confirm question** — *"Ativar o CMO para continuar o marketing agora?"* — **not** the sector's
+   domain questions. On confirm, **dispatch the owning C-level** (for marketing → the **`cmo`** agent) with
+   the open items as its agenda, and let **the CMO ask the next marketing question**. Skip Steps 1–8.
+   Only when every activated sector is handed-off do you recommend the **next slice** (`/drax-site` etc.).
 
 ## Step 1 — Detect (never mutate)
 Glob/Grep for `drax-workspace/` in the current directory **and the parent**. If
@@ -112,20 +123,26 @@ Run the two-layer loop on demand. Branding first — **nothing technical** (no s
    — the metric set (tracked over time), the test plan for each variation, and explicit +/− change
    triggers. Observability is the CTO's.
 
-## Step 8 — Close the slice: handoff, then no-dead-end report
+## Step 8 — Close the milestone: handoff, then no-dead-end report
 Confirm the four real files exist (`NAME_CLEARANCE.md` + the three branding files), set
 `brandingLoopComplete: true` and `nameClearanceVerdict: "<CLEAR|RISK|BLOCKED>"` in `STATE.json` (the flag
-append is recorded in `flagHistory`).
+append is recorded in `flagHistory`). **`brandingLoopComplete` is a milestone, not "marketing done"**
+(`DRAX_SYSTEM.md` §9): the marketing sector is complete only when the CMO hands it off with **no blocking
+open item**.
 
-**Write the slice handoff** `drax-workspace/init/HANDOFF.md` (`DRAX_SYSTEM.md` §9.2) — short, six fields:
-what was completed; the produced files (by path); which are **approved inputs** for the site slice
-(`BRANDING.md`, `BRAND_METRICS_AND_TRIGGERS.md`); open risks / `NEEDS_DECISION` / `NEEDS_EVIDENCE`
-(including the name-clearance verdict if `RISK`/`BLOCKED`); the recommended next slice; and why.
+**Write the marketing handoff** `drax-workspace/marketing/HANDOFF.md` (`DRAX_SYSTEM.md` §9.2) — short:
+what was completed; produced files (by path); the **open marketing `NEEDS_DECISION` / `NEEDS_EVIDENCE`**
+(visual identity, name lock if `RISK`/`BLOCKED`, buyer-evidence — the items that keep marketing *open*);
+and the recommended next move.
 
-Then **report with the no-dead-end pattern** (§9): state branding is complete (decision + priority vector +
-name-clearance verdict), state any open risk, then **recommend the next move first — `/drax-site`** (the
-CMO-led, IC-gated Site Build Package, Slice 2) with its one-line reason, noting alternatives (personas +
-persuasion, audience-attraction) only as on-demand future paths. Then stop — this is the slice boundary.
+Then **report with the no-dead-end pattern** (§9) and branch on the open items:
+- **Marketing still has open items** (the usual case after branding) → marketing is **not** complete.
+  Recommend **continuing marketing under the CMO** and ask the single confirm question — *"Ativar o CMO
+  para resolver os itens abertos do marketing (ex.: identidade visual) agora?"*. On confirm, dispatch the
+  **`cmo`** with those open items as its agenda and let the CMO ask the next marketing question. Do **not**
+  recommend `/drax-site` while marketing is open.
+- **Marketing is clean** (no blocking open item) → only then recommend the **next slice — `/drax-site`**
+  (CMO-led Site Build Package, Slice 2), with its one-line reason. Then stop.
 
 ## Notes
 - Two layers always: a C-level's decision is not "done" until an IC materialized it into a real file.
