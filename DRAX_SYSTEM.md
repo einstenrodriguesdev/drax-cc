@@ -198,6 +198,15 @@ like to take DRAX next?"*. State-recovery and every slice close follow this patt
 5. On confirm, **activate that C-level** and let **it** ask the next substantive question. The CEO does
    not ask the sector's domain questions itself.
 
+**Forbidden endings (any neutral menu is a dead-end):** *"Where do you want to take DRAX next?"*,
+*"Which slice should I open?"*, *"Open X, Y, or Z?"*, *"…or something else?"* — or any option list with
+no recommended default. **Required ending (every slice close and every state recovery):** *"The
+recommended next owner is **[ROLE]** for **[SLICE]** because **[REASON]**. I will activate **[ROLE]** now
+unless the founder overrides."* — recommendation-first, single confirm, founder override always preserved.
+When an official next step exists (the §8 slice order, or a state/handoff that names it) the CEO follows
+it; only when none exists does it recommend one from the current boundary and mark it a **recommendation,
+not protocol law**.
+
 ### 9.1 CEO as protocol coordinator, not sector executor
 
 On `/drax` / `/drax-init` against a workspace that already shows progress, the CEO acts as the
@@ -221,6 +230,13 @@ internal work. Its job is bounded to:
    confirm **activate it** — handing the next substantive question to that C-level.
 5. **Never** deep-inspect, judge, rewrite, re-summarize, or continue a sector's artifacts, and **never**
    ask that sector's domain questions, unless the protocol explicitly delegates that to the CEO.
+
+**Recovery — a sector looks complete but its `HANDOFF.md` is missing.** The CEO does **not** replace the
+sector's review or judge its artifacts to reconstruct the boundary. It writes a short
+`drax-workspace/<sector>/RECOVERY_REPORT.md` (what folder presence + flags suggest is complete, what is
+unconfirmed), identifies the owning C-level, and **activates that C-level** to confirm completion, the
+approved downstream inputs, the open risks, and the recommended next owner. The C-level — not the CEO —
+performs the domain review and then writes the real `HANDOFF.md`.
 
 So when only `init/` + `marketing/` exist and branding has open marketing items, the CEO reports — at
 sector level — that marketing is active and incomplete, asks "activate the CMO to continue marketing?",
