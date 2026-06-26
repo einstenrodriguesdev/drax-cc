@@ -60,12 +60,23 @@ console.log("\n# fault B: DESIGN_TOKENS component missing");
 console.log("\n# fault C: sitemap lists a page with no copy");
 {
   const ws = freshWs((ws) => edit(ws, "marketing/BRAND-site/SITEMAP.md", (t) =>
-    t + "\n- /precos.html (pricing page)\n"));
+    t + "\n- /parceiros.html (partners page)\n"));
   const r = coverageGate(ws, BRAND);
   ok(r.verdict === "BLOCKED", `verdict = ${r.verdict} (expected BLOCKED)`);
   ok(!r.mayBuild, "does NOT build");
   ok(r.owners.includes("CMO"), `routed to CMO [owners: ${r.owners.join(", ")}]`);
-  ok(r.gaps.some((g) => /precos/.test(g.detail) && /contradiction/i.test(g.detail)), "gap is the sitemap/copy contradiction");
+  ok(r.gaps.some((g) => /parceiros/.test(g.detail) && /contradiction/i.test(g.detail)), "gap is the sitemap/copy contradiction");
+}
+
+// ── fault D: a mandatory enterprise content page (blog) removed → BLOCKED, route CMO ─
+console.log("\n# fault D: mandatory blog page removed from SITEMAP");
+{
+  const ws = freshWs((ws) => edit(ws, "marketing/BRAND-site/SITEMAP.md", (t) =>
+    t.split("\n").filter((l) => !/blog/i.test(l)).join("\n")));
+  const r = coverageGate(ws, BRAND);
+  ok(r.verdict === "BLOCKED", `verdict = ${r.verdict} (expected BLOCKED)`);
+  ok(r.owners.includes("CMO"), `routed to CMO [owners: ${r.owners.join(", ")}]`);
+  ok(r.gaps.some((g) => /blog/i.test(g.detail) && /Definition of Done/i.test(g.detail)), "gap names the missing mandatory page");
 }
 
 console.log(`\n${failures === 0 ? "PASS" : "FAIL"} — ${failures} assertion failure(s).`);

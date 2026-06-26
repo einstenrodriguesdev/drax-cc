@@ -121,11 +121,13 @@ export function brandSlug(state) {
 //   slice2 site pkg  -> siteBuildPackageComplete
 //   slice3 build     -> siteBuildComplete
 //   slice4 secure    -> securityComplete
+//   slice5 deploy    -> deployedLive   (go live on draxbusiness.cloud)
 export const SLICE_PRECONDITION = {
   // slice -> the STATE flag that must be true to ENTER it (slice 1 has none)
   2: "brandingLoopComplete",
   3: "siteBuildPackageComplete",
   4: "siteBuildComplete",
+  5: "securityComplete",
 };
 
 export function computeCurrentSlice(state) {
@@ -133,7 +135,8 @@ export function computeCurrentSlice(state) {
   if (!s.brandingLoopComplete) return 1;
   if (!s.siteBuildPackageComplete) return 2;
   if (!s.siteBuildComplete) return 3;
-  return 4;
+  if (!s.securityComplete) return 4;
+  return 5;
 }
 
 // ── Protocol artifact map (grounded in DRAX_SYSTEM.md §8 + the slice skills) ────
@@ -179,6 +182,12 @@ export const ARTIFACT_MAP = {
     "security-engineer": ["cybersecurity/${brand}-site/VPS_HARDENING.md"],
     "penetration-tester": ["cybersecurity/${brand}-site/PENTEST_REPORT.md"],
     "soc-analyst": ["cybersecurity/${brand}-site/SOC_RUNBOOK.md"],
+  },
+  5: {
+    // CTO owns the path to production; devops-engineer materializes + executes the
+    // approval-gated, non-destructive go-live and writes the deploy report.
+    cto: ["technology/${brand}-site/DEPLOY_REPORT.md"],
+    "devops-engineer": ["technology/${brand}-site/DEPLOY_REPORT.md"],
   },
 };
 

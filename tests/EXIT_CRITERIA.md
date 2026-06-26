@@ -7,11 +7,14 @@ thresholds below hold. Each maps to the test(s) that prove it; run them with `te
 ## The five thresholds
 
 ### 1. Happy path passes every structural assertion
-A correct end-to-end run produces every artifact at its correct sectorial path, flips all four flags
-in order, ends with `VERIFICATION_REPORT = VERIFIED`, a clean IDLE lock, and a built site meeting the
-mobile-viewport bar.
-- **Proven by:** `tests/full-chain` (golden end state → PASS, 6 broken variants → FAIL) and the
-  happy-path scenario in `tests/chain-faults` (every gate PASS, both flags flip).
+A correct end-to-end run produces every artifact at its correct sectorial path, flips all five flags
+(branding → site-package → build → security → **deployedLive**) in order, ends with
+`VERIFICATION_REPORT = VERIFIED`, a clean IDLE lock, and a built site meeting the mobile-viewport bar.
+The Definition of Done (DRAX_SYSTEM.md §10) is enforced: `DEPLOY_REPORT.md` names **draxbusiness.cloud**
+with a passing health check + rollback path, and the SITEMAP carries the mandatory enterprise pages
+(pricing / blog / documentation + legal).
+- **Proven by:** `tests/full-chain` (golden end state → PASS, broken variants → FAIL) and the
+  happy-path scenario in `tests/chain-faults` (every gate PASS, flags flip).
 - **On a real run:** capture the run and `tests/full-chain/run.sh <run-root>` must exit 0.
 
 ### 2. 100% of injected faults are caught by the *correct* gate
@@ -57,8 +60,8 @@ observability). **Exit 0 = the whole pyramid is green.** Each level also has its
 
 Two steps are **founder-triggered and billable** (real LLM / real browser build), not in `run-all.sh`:
 
-1. **Live full-chain run** — drive `/drax → /drax-site → /drax-build → /drax-secure` to completion,
-   keep `drax-workspace/` + `drax-site/`, then:
+1. **Live full-chain run** — drive `/drax → /drax-site → /drax-build → /drax-secure → /drax-deploy` to
+   completion (site live at draxbusiness.cloud), keep `drax-workspace/` + `drax-site/`, then:
    ```bash
    tests/full-chain/run.sh   <run-root>      # criteria 1, 5 (structure + reset count)
    tests/observability/run.sh <run-root>     # criteria 5 + process health

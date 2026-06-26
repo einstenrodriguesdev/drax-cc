@@ -18,6 +18,16 @@ import path from "node:path";
 // Mandatory legal pages for this jurisdiction (LGPD): privacy + terms.
 const REQUIRED_LEGAL = ["privacidade", "termos"];
 
+// Mandatory enterprise content pages (DRAX_SYSTEM.md §10 Definition of Done):
+// every professional build must ship pricing, blog, and documentation. Aliases are
+// matched case-insensitively so PT/EN slugs (/precos, /pricing, /docs, /documentacao)
+// all satisfy the requirement.
+const REQUIRED_CONTENT_PAGES = [
+  { key: "pricing", aliases: ["pricing", "preco", "plano"] },
+  { key: "blog", aliases: ["blog"] },
+  { key: "documentation", aliases: ["documenta", "/docs", "/doc"] },
+];
+
 function read(wsRoot, rel) {
   try { return fs.readFileSync(path.join(wsRoot, rel), "utf8"); } catch { return null; }
 }
@@ -64,6 +74,13 @@ export function coverageGate(wsRoot, brand) {
   for (const p of REQUIRED_LEGAL) {
     if (!declaredLegal.includes(p)) gap("CLO", `mandatory legal page "/${p}" not declared in LEGAL_PAGES.md`);
     if (!pages.some((pg) => pg.includes(p))) gap("CLO", `mandatory legal page "/${p}" missing from SITEMAP.md`);
+  }
+
+  // 2b. Mandatory enterprise content pages present in the sitemap (CMO owns).
+  const pagesLc = pages.map((pg) => pg.toLowerCase());
+  for (const c of REQUIRED_CONTENT_PAGES) {
+    if (!pagesLc.some((pg) => c.aliases.some((a) => pg.includes(a))))
+      gap("CMO", `mandatory ${c.key} page missing from SITEMAP.md (Definition of Done requires pricing + blog + documentation)`);
   }
 
   // 3. Disclosures — cookie notice + footer legal block referenced (CLO owns).

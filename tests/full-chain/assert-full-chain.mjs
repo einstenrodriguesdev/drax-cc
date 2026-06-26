@@ -2,13 +2,16 @@
 // L3 — full-chain structural verifier (Task #7).
 //
 // Deterministic assertions over the END STATE of a happy-path run
-// (/drax → /drax-site → /drax-build → /drax-secure). The chain itself is LLM-driven
-// and founder-triggered; THIS verifies the captured result is structurally correct:
+// (/drax → /drax-site → /drax-build → /drax-secure → /drax-deploy). The chain itself
+// is LLM-driven and founder-triggered; THIS verifies the captured result is correct:
 //   • every slice produced its artifacts at the correct sectorial paths
-//   • all four completion flags are true, and (via the dependency chain + optional
+//   • all FIVE completion flags are true, and (via the dependency chain + optional
 //     flagHistory) flipped IN ORDER — you cannot reach a later flag without the
 //     earlier slice's outputs (order enforcement itself is proven in Tasks #5/#6)
 //   • VERIFICATION_REPORT = VERIFIED, the built site meets the mobile-viewport bar
+//   • Definition of Done (§10): DEPLOY_REPORT names draxbusiness.cloud with a passing
+//     health check + rollback, deployedLive=true, and the SITEMAP carries the
+//     mandatory enterprise pages (pricing/blog/documentation + legal)
 //   • the lock ended clean (IDLE) and the reset count is 0
 //
 // Point it at a real captured run root (containing drax-workspace/ + drax-site/),
@@ -22,6 +25,17 @@ const CANONICAL_FLAG_ORDER = [
   "siteBuildPackageComplete",
   "siteBuildComplete",
   "securityComplete",
+  "deployedLive",
+];
+
+// Mandatory enterprise pages the Definition of Done (DRAX_SYSTEM.md §10) requires
+// the shipped site to carry, matched against the SITEMAP (PT/EN aliases).
+const REQUIRED_PAGES = [
+  { key: "pricing", aliases: ["pricing", "preco", "plano"] },
+  { key: "blog", aliases: ["blog"] },
+  { key: "documentation", aliases: ["documenta", "/docs", "/doc"] },
+  { key: "privacy (legal)", aliases: ["privac"] },
+  { key: "terms (legal)", aliases: ["termos", "terms"] },
 ];
 
 function artifactManifest(b) {
@@ -58,6 +72,9 @@ function artifactManifest(b) {
       `cybersecurity/${b}-site/PENTEST_REPORT.md`,
       `cybersecurity/${b}-site/SOC_RUNBOOK.md`,
     ],
+    5: [
+      `technology/${b}-site/DEPLOY_REPORT.md`,
+    ],
   };
 }
 
@@ -79,7 +96,7 @@ export function assertFullChain(runRoot) {
 
   // 2. artifacts present at correct sectorial paths
   const manifest = artifactManifest(brand);
-  for (const slice of [1, 2, 3, 4]) {
+  for (const slice of [1, 2, 3, 4, 5]) {
     for (const rel of manifest[slice]) if (!exists(path.join(ws, rel))) fail(`slice ${slice}: missing artifact ${rel}`);
   }
 
@@ -91,6 +108,28 @@ export function assertFullChain(runRoot) {
     fail("siteBuildComplete=true but VERIFICATION_REPORT is not VERIFIED (order/quality violation)");
   if (state.securityComplete && !exists(path.join(ws, `cybersecurity/${brand}-site/SOC_RUNBOOK.md`)))
     fail("securityComplete=true but slice-4 outputs absent (order violation)");
+  const deployReport = read(path.join(ws, `technology/${brand}-site/DEPLOY_REPORT.md`));
+  if (state.deployedLive && !state.securityComplete)
+    fail("deployedLive=true but securityComplete is not (order violation — never deploy an unhardened site)");
+  if (state.deployedLive && !deployReport)
+    fail("deployedLive=true but DEPLOY_REPORT.md absent (order violation)");
+
+  // 3b. Definition of Done — the deploy actually went live and is reachable.
+  if (!deployReport) fail("DEPLOY_REPORT.md missing (run is not done until deployed)");
+  else {
+    if (!/draxbusiness\.cloud/.test(deployReport)) fail("DEPLOY_REPORT does not name the target domain draxbusiness.cloud");
+    if (!/(health[\s-]*check|reachable|200\b|HEALTHY|live)/i.test(deployReport))
+      fail("DEPLOY_REPORT records no successful health check / reachability evidence");
+    if (!/rollback/i.test(deployReport)) fail("DEPLOY_REPORT records no rollback path");
+  }
+  if (state.deployedLive !== true) fail("deployedLive is not true (the site is not live)");
+
+  // 3c. Mandatory enterprise pages present in the shipped SITEMAP (DoD §10).
+  const sitemap = read(path.join(ws, `marketing/${brand}-site/SITEMAP.md`)) || "";
+  const smLc = sitemap.toLowerCase();
+  for (const pg of REQUIRED_PAGES) {
+    if (!pg.aliases.some((a) => smLc.includes(a))) fail(`mandatory page "${pg.key}" absent from SITEMAP (DoD requires pricing/blog/documentation + legal pages)`);
+  }
 
   // 4. VERIFICATION_REPORT = VERIFIED
   if (!vr) fail("VERIFICATION_REPORT.md missing");

@@ -7,10 +7,12 @@
   "siteBuildPackageComplete": true,
   "siteBuildComplete": true,
   "securityComplete": true,
+  "deployedLive": true,
   "flagHistory": [
     { "flag": "brandingLoopComplete", "at": "2026-06-25T01:00:00.000Z" },
     { "flag": "siteBuildPackageComplete", "at": "2026-06-25T02:00:00.000Z" },
     { "flag": "siteBuildComplete", "at": "2026-06-25T03:00:00.000Z" },
-    { "flag": "securityComplete", "at": "2026-06-25T04:00:00.000Z" }
+    { "flag": "securityComplete", "at": "2026-06-25T04:00:00.000Z" },
+    { "flag": "deployedLive", "at": "2026-06-25T05:00:00.000Z" }
   ]
 }
