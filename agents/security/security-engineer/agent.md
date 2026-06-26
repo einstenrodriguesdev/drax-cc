@@ -15,6 +15,9 @@ org:
   level: ic
   reports_to: ciso
   executive_owner: ciso
+  inputs:
+    - drax-workspace/cybersecurity/<brand>-site/SECURITY_DECISION.md
+    - drax-workspace/technology/<brand>-site/DEPLOY_PLAN.md
   owns_outputs:
     - drax-workspace/cybersecurity/<brand>-site/VPS_HARDENING.md
 ---

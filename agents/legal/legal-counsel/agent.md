@@ -15,6 +15,9 @@ org:
   level: ic
   reports_to: clo
   executive_owner: clo
+  inputs:
+    - drax-workspace/legal/<brand>-site/LEGAL_REQUIREMENTS.md
+    - drax-workspace/legal/COMPLIANCE_BASELINE.md
   owns_outputs:
     - drax-workspace/legal/<brand>-site/LEGAL_PAGES.md
 ---

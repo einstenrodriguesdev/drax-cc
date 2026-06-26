@@ -16,6 +16,11 @@ org:
   level: c_level
   reports_to: ceo
   executive_owner: cmo
+  inputs:
+    - drax-workspace/init/SCENARIO.md
+    - drax-workspace/init/STATE.json
+    - drax-workspace/marketing/branding/BRANDING.md
+    - drax-workspace/marketing/branding/NAME_CLEARANCE.md
   owns_outputs:
     - drax-workspace/marketing/branding/BRANDING_DECISION.md
     - drax-workspace/marketing/<brand>-site/SITE_BRIEF.md

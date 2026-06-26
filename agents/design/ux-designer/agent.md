@@ -15,6 +15,9 @@ org:
   level: ic
   reports_to: design-cto
   executive_owner: design-cto
+  inputs:
+    - drax-workspace/design/<brand>-site/DESIGN_DECISION.md
+    - drax-workspace/marketing/<brand>-site/SITEMAP.md
   owns_outputs:
     - drax-workspace/design/<brand>-site/DESIGN_TOKENS.md
     - drax-workspace/marketing/<brand>-site/WIREFRAMES.md

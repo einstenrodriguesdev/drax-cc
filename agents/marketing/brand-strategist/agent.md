@@ -15,6 +15,9 @@ org:
   level: ic
   reports_to: cmo
   executive_owner: cmo
+  inputs:
+    - drax-workspace/init/SCENARIO.md
+    - drax-workspace/marketing/branding/BRANDING_DECISION.md
   owns_outputs:
     - drax-workspace/marketing/branding/BRANDING.md
 ---

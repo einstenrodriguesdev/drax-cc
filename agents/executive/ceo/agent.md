@@ -14,6 +14,9 @@ org:
   level: c_level
   reports_to: founder
   executive_owner: ceo
+  inputs:
+    - drax-workspace/init/SCENARIO.md
+    - drax-workspace/init/STATE.json
   owns_outputs:
     - drax-workspace/init/STATE.json
     - drax-workspace/init/SCENARIO.md

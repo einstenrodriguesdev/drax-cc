@@ -16,6 +16,10 @@ org:
   level: c_level
   reports_to: ceo
   executive_owner: ciso
+  inputs:
+    - drax-workspace/technology/<brand>-site/BUILD_PLAN.md
+    - drax-workspace/technology/<brand>-site/DEPLOY_PLAN.md
+    - drax-workspace/legal/<brand>-site/LEGAL_REQUIREMENTS.md
   owns_outputs:
     - drax-workspace/cybersecurity/<brand>-site/SECURITY_DECISION.md
 ---

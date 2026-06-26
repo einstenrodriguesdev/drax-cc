@@ -16,6 +16,9 @@ org:
   level: c_level
   reports_to: ceo
   executive_owner: clo
+  inputs:
+    - drax-workspace/marketing/branding/NAME_CLEARANCE.md
+    - drax-workspace/marketing/<brand>-site/SITE_BRIEF.md
   owns_outputs:
     - drax-workspace/legal/<brand>-site/LEGAL_REQUIREMENTS.md
     - drax-workspace/legal/COMPLIANCE_BASELINE.md

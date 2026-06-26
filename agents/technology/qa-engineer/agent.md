@@ -16,6 +16,10 @@ org:
   level: ic
   reports_to: cto
   executive_owner: cto
+  inputs:
+    - drax-workspace/technology/<brand>-site/BUILD_PLAN.md
+    - drax-workspace/marketing/<brand>-site/SITE_BUILD_PACKAGE.md
+    - drax-site/ (the built site)
   owns_outputs:
     - drax-workspace/technology/<brand>-site/QA_REPORT.md
 ---

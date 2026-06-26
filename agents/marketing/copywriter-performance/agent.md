@@ -15,6 +15,10 @@ org:
   level: ic
   reports_to: cmo
   executive_owner: cmo
+  inputs:
+    - drax-workspace/marketing/<brand>-site/SITEMAP.md
+    - drax-workspace/marketing/<brand>-site/KEYWORD_MAP.md
+    - drax-workspace/marketing/branding/BRANDING.md
   owns_outputs:
     - drax-workspace/marketing/<brand>-site/COPY_DECK.md
 ---

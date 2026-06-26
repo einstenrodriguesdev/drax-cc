@@ -16,6 +16,10 @@ org:
   level: c_level
   reports_to: ceo
   executive_owner: design-cto
+  inputs:
+    - drax-workspace/marketing/branding/BRANDING.md
+    - drax-workspace/marketing/<brand>-site/SITE_BRIEF.md
+    - drax-workspace/marketing/<brand>-site/SITEMAP.md
   owns_outputs:
     - drax-workspace/design/<brand>-site/DESIGN_DECISION.md
 ---
